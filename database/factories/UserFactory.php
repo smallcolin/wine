@@ -2,6 +2,7 @@
 
 use Faker\Generator as Faker;
 use Faker\Provider\en_US\Address;
+use Faker\Provider\Base;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -56,7 +57,8 @@ $factory->define(App\Comment::class, function (Faker $faker) {
       'customer_id' => $faker->randomDigit,
       'wine_id' => $faker->randomDigit,
       'title' => $faker->word,
-      'body' => $faker->text($maxNbChars = 200)
+      'body' => $faker->text($maxNbChars = 200),
+      'grade' => $faker->numberBetween($min=1, $max=5)
     ];
 });
 

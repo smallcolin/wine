@@ -66,6 +66,7 @@
         </style>
     </head>
     <body>
+      @include('notifi')
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -80,7 +81,7 @@
             <div class="container">
               <div class="row">
 
-                <div class="col-md-12">
+                <div class="col-md-3">
                   <div class="list-group text-center">
                     <ul>
                       <a href="#">
@@ -89,16 +90,15 @@
                       <a href="#">
                         <li class="list-group-item">Gallery</li>
                       </a>
-                      <a href="#">
+                      <a href="/admin">
                         <li class="list-group-item">Admin Area</li>
                       </a>
                     </ul>
                   </div>
                 </div>
-
-              </div>
-              <div class="row">
-                @yield('content')
+                  <div class="col-md-9">
+                    @yield('content')
+                  </div>
               </div>
             </div>
 

@@ -9,7 +9,7 @@
     <div class="col-md-3">
       <ul style="position:fixed;">
         <li class="list-group-item">
-          <a href="{{route('country.show')}}">All Countries</a>
+          <a href="{{route('country.show')}}">Countries</a>
         </li>
         <li class="list-group-item">
           <a href="{{route('country.create')}}">Create a Country</a>
@@ -21,7 +21,7 @@
           <a href="">Customers</a>
         </li>
         <li class="list-group-item">
-          <a href="">Comments</a>
+          <a href="{{route('comment.show')}}">Comments</a>
         </li>
         <li class="list-group-item">
           <a href="">Orders</a>

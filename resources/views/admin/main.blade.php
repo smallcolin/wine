@@ -26,6 +26,9 @@
         <li class="list-group-item">
           <a href="">Orders</a>
         </li>
+        <li class="list-group-item">
+          <a href="">Export</a>
+        </li>
       </ul>
     </div>
   </div>

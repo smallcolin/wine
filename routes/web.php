@@ -56,12 +56,28 @@ Route::get('/country/{id}/delete', [
   'as' => 'country.delete'
 ]);
 
+
+
 // Comments Routes
 
 
 
 
-// Customer Routes
+// CUSTOMER ROUTES
+// Main customer page
+Route::get('/customer', function () {
+    return view('customers/main');
+});
+// Create a wine
+Route::get('/wines/create', [
+  'uses' => 'WineController@create',
+  'as' => 'wine.create'
+]);
+
+Route::post('/wine/store', [
+  'uses' => 'WineController@store',
+  'as' => 'wine.store'
+]);
 
 
 
@@ -78,7 +94,22 @@ Route::get('/wines', [
   'as' => 'wine.show',
 ]);
 
-Route::get('/wines/create', [
-  'uses' => 'WineController@create',
-  'as' => 'wine.create'
+Route::get('/wine/{wine}/edit', [
+  'uses' => 'WineController@edit',
+  'as' => 'wine.edit'
+]);
+
+Route::post('/wine/{id}/update', [
+  'uses' => 'WineController@update',
+  'as' => 'wine.update'
+]);
+
+Route::get('/wine/{id}/delete', [
+  'uses' => 'WineController@delete',
+  'as' => 'wine.delete'
+]);
+
+Route::get('/wines/{id}', [
+  'uses' => 'WineController@showOne',
+  'as' => 'wine.showOne'
 ]);

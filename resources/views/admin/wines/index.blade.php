@@ -1,8 +1,8 @@
 @extends('admin/main')
 
 @section('admin-content')
-  <h2>All the Wines</h2>
-  <table class="table">
+  <h3>All the Wines</h3>
+  <table class="">
     <thead>
       <tr>
         <th>Image</th>
@@ -21,18 +21,18 @@
           <td>
             <img class="img-rounded" style="width: 100px; height: 70px;" src="{{URL($wine->image_url)}}">
           </td>
-          <td>{{$wine->name}}</td>
+          <td><a href="{{route('wine.showOne', ['id' => $wine->id])}}">{{$wine->name}}</a></td>
           <td>{{$wine->description}}</td>
           <td>{{$wine->country->name}}</td>
           <td>{{$wine->price}}</td>
           <td>{{$wine->stock}}</td>
           <td>
-            <a class="btn-sm btn-info" href="">
+            <a class="btn-sm btn-info" href="{{route('wine.edit', ['wine' => $wine->id])}}">
               Edit
             </a>
           </td>
           <td>
-            <a class="btn-sm btn-danger" href="">
+            <a class="btn-sm btn-danger" href="{{route('wine.delete', ['id' => $wine->id])}}">
               Delete
             </a>
           </td>

@@ -10,7 +10,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
+        <script src="https://use.fontawesome.com/92a37b560d.js"></script>
         <!-- Styles -->
         <style>
             html, body {
@@ -67,7 +67,7 @@
     </head>
     <body>
       @include('notifi')
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -78,20 +78,44 @@
                     @endauth
                 </div>
             @endif
+        </div>
+            <div class="container">
+              <div class="row text-center">
+                <a href="/">
+                  <h1>WINE</h1>
+                </a>
+              </div>
+            </div>
+
             <div class="container">
               <div class="row">
-
                 <div class="col-md-3">
                   <div class="list-group text-center">
                     <ul>
                       <a href="#">
-                        <li class="list-group-item">Wines</li>
+                        <li class="list-group-item">
+                          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                          Store
+                        </li>
                       </a>
                       <a href="#">
-                        <li class="list-group-item">Gallery</li>
+                        <li class="list-group-item">
+                          <i class="fa fa-picture-o" aria-hidden="true"></i>
+                          Gallery
+                        </li>
                       </a>
                       <a href="/admin">
-                        <li class="list-group-item">Admin Area</li>
+                        <li class="list-group-item">
+                          <i class="fa fa-user-plus" aria-hidden="true"></i>
+                          Admin Area
+                        </li>
+                      </a>
+                      </a>
+                      <a href="/customer">
+                        <li class="list-group-item">
+                          <i class="fa fa-user-plus" aria-hidden="true"></i>
+                          Customer
+                        </li>
                       </a>
                     </ul>
                   </div>
@@ -101,7 +125,5 @@
                   </div>
               </div>
             </div>
-
-        </div>
     </body>
 </html>

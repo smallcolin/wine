@@ -20,4 +20,8 @@ class Wine extends Model
   {
     return $this->hasMany(Comment::class);
   }
+
+  protected $fillable = [
+      'name', 'description', 'country_id', 'price', 'stock', 'image_url'
+  ];
 }

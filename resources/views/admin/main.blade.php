@@ -7,7 +7,7 @@
       @yield('admin-content')
     </div>
     <div class="col-md-3">
-      <ul>
+      <ul style="position:fixed;">
         <li class="list-group-item">
           <a href="{{route('country.show')}}">All Countries</a>
         </li>
@@ -18,7 +18,13 @@
           <a href="{{route('wine.show')}}">Wines</a>
         </li>
         <li class="list-group-item">
-          <a href="{{route('wine.create')}}">Add a Wine</a>
+          <a href="">Customers</a>
+        </li>
+        <li class="list-group-item">
+          <a href="">Comments</a>
+        </li>
+        <li class="list-group-item">
+          <a href="">Orders</a>
         </li>
       </ul>
     </div>

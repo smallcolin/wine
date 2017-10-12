@@ -2,84 +2,81 @@
 
 namespace App\Http\Controllers;
 
-use App\Country;
 use Illuminate\Http\Request;
+use App\Country;
+use App\Wine;
+use Session;
 
-class CountriesController extends Controller
+class CountryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+  public function index()
+  {
+    $countries = Country::all();
+
+    return view('admin.countries.index')->with('countries', $countries);
+  }
+
+  public function create()
+  {
+    return view('admin.countries.create');
+  }
+
+  public function store()
+  {
+    $this->validate(request(), [
+      'name' => 'required|string'
+    ]);
+
+    $country = new Country;
+    $country->name = request()->name;
+    $country->save();
+
+    Session::flash('success', 'Country was successfully created!');
+
+    return redirect('/countries');
+  }
+
+  public function edit(Country $country)
+  {
+    return view('admin.countries.edit')->with('country', $country);
+  }
+
+  public function update($id)
+  {
+    $this->validate(request(), [
+      'name' => 'required|string|max:40'
+    ]);
+    $country = Country::findOrFail($id);
+    $country->name = request()->name;
+    $country->save();
+
+    Session::flash('success', 'Country was updated');
+
+    return redirect()->route('country.show');
+  }
+
+  public function delete($id)
+  {
+    // Search database for id
+    $country = Country::findOrFail($id);
+
+    // SQL search to find any use of id in Wine table
+    $winesWithCountry = Wine::where('country_id', $id)->get();
+
+    // Disable delete if any use is found
+    if (count($winesWithCountry) > 0) {
+      Session::flash('error', 'You can\'t delete a country that is attached to a wine!');
+      return redirect()->back();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    //
+    $country->delete();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    // Display a message
+    Session::flash('success', 'You have deleted the country!');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Country  $country
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Country $country)
-    {
-        //
-    }
+    // redirect to all countries page
+    return redirect()->route('country.show');
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Country  $country
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Country $country)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Country  $country
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Country $country)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Country  $country
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Country $country)
-    {
-        //
-    }
 }

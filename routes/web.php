@@ -20,10 +20,41 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-// Admin Routes
+// ADMIN ROUTES
+// Main admin page
+Route::get('/admin', function () {
+    return view('admin/main');
+});
+// Countries
+Route::get('/countries', [
+  'uses' => 'CountryController@index',
+  'as' => 'country.show'
+]);
 
+Route::get('/countries/create', [
+  'uses' => 'CountryController@create',
+  'as' => 'country.create'
+]);
 
+Route::post('/country/store', [
+  'uses' => 'CountryController@store',
+  'as' => 'country.store'
+]);
 
+Route::get('/country/{country}/edit', [
+  'uses' => 'CountryController@edit',
+  'as' => 'country.edit'
+]);
+
+Route::post('/country/{id}/update', [
+  'uses' => 'CountryController@update',
+  'as' => 'country.update'
+]);
+
+Route::get('/country/{id}/delete', [
+  'uses' => 'CountryController@delete',
+  'as' => 'country.delete'
+]);
 
 // Comments Routes
 
@@ -41,3 +72,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Wine Routes
+
+Route::get('/wines', [
+  'uses' => 'WineController@index',
+  'as' => 'wine.show',
+]);
+
+Route::get('/wines/create', [
+  'uses' => 'WineController@create',
+  'as' => 'wine.create'
+]);

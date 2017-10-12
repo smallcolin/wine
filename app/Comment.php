@@ -10,4 +10,9 @@ class Comment extends Model
   {
       return $this->belongsTo(Wine::class)->withDefault();
   }
+
+  public function customers()
+  {
+      return $this->belongsTo(Customer::class)->withDefault();
+  }
 }

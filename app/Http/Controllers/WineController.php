@@ -23,7 +23,7 @@ class WineController extends Controller
       $wine = Wine::findOrFail($id);
       // $comments = Comment::where('wine_id', $id)->get();
       // Get all comments associated with a particular wine
-      $comments = $wine->comments()->with('customers')->get();
+      $comments = $wine->comments()->with('customer')->get();
       $rating = "5 stars";
 
       return view('store.wines.showOneWine')->with('wine', $wine)->with('comments', $comments)->with('rating', $rating);

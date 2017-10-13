@@ -56,9 +56,25 @@ Route::get('/country/{id}/delete', [
   'as' => 'country.delete'
 ]);
 // Customer Routes
+// Show all customers
 Route::get('/admin/customers', [
   'uses' => 'CustomerController@index',
   'as' => 'customer.show'
+]);
+// Delete a customer
+Route::get('/customer/{id}/delete', [
+  'uses' => 'CustomerController@delete',
+  'as' => 'customer.delete'
+]);
+// Edit a customer
+Route::get('/customer/{customer}/edit', [
+  'uses' => 'CustomerController@edit',
+  'as' => 'customer.edit'
+]);
+// Update a customer
+Route::post('/customer/{id}/update', [
+  'uses' => 'CustomerController@update',
+  'as' => 'customer.update'
 ]);
 
 

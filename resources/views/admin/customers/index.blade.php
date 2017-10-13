@@ -17,12 +17,12 @@
         <td>{{$customer->name}}</td>
         <td>{{$customer->email}}</td>
         <td>
-          <a class="btn-sm btn-info" href="">
+          <a class="btn-sm btn-info" href="{{route('customer.edit', ['id' => $customer->id])}}">
             Edit
           </a>
         </td>
         <td>
-          <a class="btn-sm btn-danger" href="">
+          <a class="btn-sm btn-danger" href="{{route('customer.delete', ['id' => $customer->id])}}">
             Delete
           </a>
         </td>

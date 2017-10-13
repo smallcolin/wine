@@ -1,8 +1,8 @@
 @extends('admin/main')
 
 @section('admin-content')
-  <h3>Comments</h3>
-  <table class="">
+  <h3>All Comments</h3>
+  <table class="table">
     <thead>
       <tr>
         <th>Wine</th>
@@ -17,7 +17,7 @@
     <tbody>
       @foreach ($comments as $comment)
         <tr>
-          <td><a href="{{route('wine.showOne', ['id' => $comment->wine_id])}}">{{$comment->wines->name}}</a></td> <!--names needed-->
+          <td><a href="{{route('wine.showOne', ['id' => $comment->wine_id])}}">{{$comment->wine->name}}</a></td> <!--names needed-->
           <td>{{$comment->title}}</td>
           <td>{{$comment->body}}</td>
           <td>{{$comment->customer->name}}</td> <!--names needed-->

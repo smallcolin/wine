@@ -2,7 +2,7 @@
 
 @section('admin-content')
   <h3>All the Wines</h3>
-  <table class="">
+  <table class="table">
     <thead>
       <tr>
         <th>Image</th>

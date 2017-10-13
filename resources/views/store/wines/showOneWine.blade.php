@@ -53,8 +53,13 @@
           <ul style="list-style: none;padding:0;">
             <li><strong>{{$comment->title}}</strong></li>
             <li>{{$comment->body}}</li>
-            <li>Written by {{$comment->customer->name}}</li>
-            <li>Wine reviewed: {{$comment->wine->name}}</li>
+            <li>Written by {{$comment->customer->name}}
+              @php
+                $time = strtotime($comment->created_at);
+                $newTime = date("m/d/y, G:i", $time);
+                echo '<p>' . $newTime . '</p>';
+              @endphp
+            </li>
           </ul>
           <hr />
       @endforeach
@@ -64,9 +69,11 @@
       <form action="{{route('comment.store')}}" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="wine_id" value="{{$wine->id}}">
+        <input type="hidden" name="customer_id" value="">  <!--Need logged in user id to fill in value-->
         <div class="form-group">
           <label for="customer_id">Name</label>
-          <input type="text" class="form-control" name="customer_id">
+          <input type="text" class="form-control" name="customer_id"> <!--Delete later-->
+          <h5></h5>  <!--Need logged in user id to fill in name-->
         </div>
 
         <div class="form-group">

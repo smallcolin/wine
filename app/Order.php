@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-  public function wines()
+  public function wine()
   {
-    return $this->hasMany(Wine::class);
+    return $this->belongsTo(Wine::class)->withDefault();
   }
 }

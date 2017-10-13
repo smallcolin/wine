@@ -5,56 +5,37 @@ namespace App\Http\Controllers;
 use App\Order;
 use Illuminate\Http\Request;
 
+use Session;
+
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Show all orders
     public function index()
     {
-        //
+      $orders = Order::all();
+
+      return view('admin.orders.index')->with('orders', $orders);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Create an order
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Save an order
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Order $order)
+    // Show an indivual order
+    public function showOneOrder(Order $order)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Order $order)
     {
         //
@@ -72,14 +53,19 @@ class OrderController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Order $order)
+    // Delete an order
+    public function delete($id)
     {
-        //
+      // Search database for id
+      $order = Order::findOrFail($id);
+
+      // Delete database entry
+      $order->delete();
+
+      // Display a message
+      Session::flash('success', 'You have deleted the order!');
+
+      // redirect to all countries page
+      return redirect()->route('order.show');
     }
 }

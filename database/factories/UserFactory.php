@@ -32,7 +32,7 @@ $factory->define(App\Wine::class, function (Faker $faker) {
 
     return [
       'country_id' => $faker->randomDigit,
-      'name' => $faker->word,
+      'name' => $faker->unique()->word,
       'description' => $faker->text($maxNbChars = 200),
       'price' => $faker->randomDigit(),
       'stock' => $faker->randomDigit,

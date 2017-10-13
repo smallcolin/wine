@@ -21,10 +21,10 @@ class WineController extends Controller
     public function showOne($id)
     {
       $wine = Wine::findOrFail($id);
-      $
+
       // Get all comments associated with a particular wine
       $comments = $wine->comments()->with('customer')->get();
-
+      // Get the average grade for each wine
       $rating = "5 stars";
 
       return view('store.wines.showOneWine')->with('wine', $wine)->with('comments', $comments)->with('rating', $rating);

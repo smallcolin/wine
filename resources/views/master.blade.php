@@ -107,13 +107,13 @@
                       <a href="/admin">
                         <li class="list-group-item">
                           <i class="fa fa-user-plus" aria-hidden="true"></i>
-                          Admin Area
+                          Admin
                         </li>
                       </a>
                       </a>
                       <a href="/customer">
                         <li class="list-group-item">
-                          <i class="fa fa-user-plus" aria-hidden="true"></i>
+                          <i class="fa fa-user" aria-hidden="true"></i>
                           Customer
                         </li>
                       </a>

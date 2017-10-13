@@ -2,7 +2,7 @@
 
 @section('admin-content')
   <h2>All countries</h2>
-  <table class="">
+  <table class="table">
     <thead>
       <tr>
         <th>Country</th>

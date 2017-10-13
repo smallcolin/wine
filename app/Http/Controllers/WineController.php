@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Wine;
 use App\Country;
+use App\Comment;
 use Illuminate\Http\Request;
 use Session;
 
@@ -20,8 +21,12 @@ class WineController extends Controller
     public function showOne($id)
     {
       $wine = Wine::findOrFail($id);
+      // $comments = Comment::where('wine_id', $id)->get();
+      // Get all comments associated with a particular wine
+      $comments = $wine->comments()->with('customers')->get();
+      $rating = "5 stars";
 
-      return view('store.wines.showOneWine')->with('wine', $wine);
+      return view('store.wines.showOneWine')->with('wine', $wine)->with('comments', $comments)->with('rating', $rating);
     }
 
     // Create new wine
@@ -49,7 +54,7 @@ class WineController extends Controller
       $image->move('uploads/', $new_name);
 
       // Send data to database
-      $product = Wine::create([
+      $wine = Wine::create([
         'country_id' => request()->country_id,
         'name' => request()->name,
         'description' => request()->description,

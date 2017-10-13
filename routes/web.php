@@ -58,7 +58,35 @@ Route::get('/country/{id}/delete', [
 
 
 
-// Comments Routes
+// COMMENTS ROUTES
+// Admin Comments page
+Route::get('/comments', [
+  'uses' => 'CommentController@index',
+  'as' => 'comment.show'
+]);
+// Save a comment
+Route::post('/comment/store', [
+  'uses' => 'CommentController@store',
+  'as' => 'comment.store'
+]);
+// Delete Comments
+Route::get('/comment/{id}/delete', [
+  'uses' => 'CommentController@delete',
+  'as' => 'comment.delete'
+]);
+// Edit a comment
+Route::get('/comment/{comment}/edit', [
+  'uses' => 'CommentController@edit',
+  'as' => 'comment.edit'
+]);
+// Update a comment
+Route::post('/comment/{id}/update', [
+  'uses' => 'CommentController@update',
+  'as' => 'comment.update'
+]);
+
+
+
 
 
 
@@ -73,7 +101,7 @@ Route::get('/wines/create', [
   'uses' => 'WineController@create',
   'as' => 'wine.create'
 ]);
-
+// Save a wine
 Route::post('/wine/store', [
   'uses' => 'WineController@store',
   'as' => 'wine.store'

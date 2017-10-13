@@ -11,14 +11,19 @@ class Wine extends Model
     return $this->belongsTo(Country::class)->withDefault();
   }
 
-  public function orders()
+  public function customers()
   {
-    return $this->hasMany(Order::class);
+    $this->belongsTo(Customer::class)->withDefault();
   }
-
+  
   public function comments()
   {
     return $this->hasMany(Comment::class);
+  }
+
+  public function orders()
+  {
+    return $this->hasMany(Order::class);
   }
 
   protected $fillable = [

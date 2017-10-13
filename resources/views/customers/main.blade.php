@@ -12,7 +12,7 @@
           <a href="">My Orders</a>
         </li>
         <li class="list-group-item">
-          <a href="">My Comments</a>
+          <a href="{{route('customerComment.show')}}">My Comments</a>
         </li>
         <li class="list-group-item">
           <a href="{{route('wine.create')}}">Add a wine</a>

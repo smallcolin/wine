@@ -18,7 +18,7 @@
           <a href="{{route('wine.show')}}">Wines</a>
         </li>
         <li class="list-group-item">
-          <a href="">Customers</a>
+          <a href="{{route('customer.show')}}">Customers</a>
         </li>
         <li class="list-group-item">
           <a href="{{route('comment.show')}}">Comments</a>

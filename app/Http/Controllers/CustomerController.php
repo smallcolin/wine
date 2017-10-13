@@ -7,14 +7,12 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Show all customers
     public function index()
     {
-        //
+      $customers = Customer::all();
+
+      return view('admin.customers.index')->with('customers', $customers);
     }
 
     /**

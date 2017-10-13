@@ -55,6 +55,11 @@ Route::get('/country/{id}/delete', [
   'uses' => 'CountryController@delete',
   'as' => 'country.delete'
 ]);
+// Customer Routes
+Route::get('/admin/customers', [
+  'uses' => 'CustomerController@index',
+  'as' => 'customer.show'
+]);
 
 
 
@@ -106,7 +111,26 @@ Route::post('/wine/store', [
   'uses' => 'WineController@store',
   'as' => 'wine.store'
 ]);
-
+// Show all comments
+Route::get('/customer/comments', [
+  'uses' => 'CommentController@showCustomerComment',
+  'as' => 'customerComment.show'
+]);
+// Delete Comments
+Route::get('/customer/comments/{id}/delete', [
+  'uses' => 'CommentController@customerCommentDelete',
+  'as' => 'customerComment.delete'
+]);
+// Edit a comment
+Route::get('/customer/comment/{comment}/edit', [
+  'uses' => 'CommentController@customerCommentEdit',
+  'as' => 'customerComment.edit'
+]);
+// Update a comment
+Route::post('/customer/comment/{id}/update', [
+  'uses' => 'CommentController@customerCommentUpdate',
+  'as' => 'customerComment.update'
+]);
 
 
 

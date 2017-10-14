@@ -6,10 +6,23 @@
       <img style="width: 100%; height: auto; margin-top: 10px;" src="{{URL($wine->image_url)}}" alt="">
       <div class="panel panel-default">
         <div class="panel-body">
-          Average Rating:
-          @php
-          echo $rating;
-          @endphp
+          <ul style="list-style: none; margin-top: 20px;">
+            <li>
+              Average Rating:
+              @php
+              echo $rating;
+              @endphp
+            </li>
+            <li>&nbsp<!--Empty Row--></li>
+            <li>
+              <a href="/" class="btn btn-outline-info">
+                Back to Store
+              </a>
+              <a href="" class="btn btn-outline-success">
+                Add to Cart
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -37,9 +50,7 @@
           @endphp
         </li>
         <li class="list-group-item">
-          <a href="" class="btn btn-danger">
-            Add to cart
-          </a>
+          Contributed by: {{$wine->customer->name}}
         </li>
       </ul>
     </div>

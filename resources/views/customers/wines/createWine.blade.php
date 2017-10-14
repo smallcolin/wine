@@ -4,7 +4,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3>Edit wine</h3>
+      <h3>Submit wine</h3>
     </div>
     <div class="panel-body">
       <form class="" action="{{route('wine.store')}}" method="post" enctype="multipart/form-data">
@@ -30,9 +30,19 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="image">Image</label>
-          <input type="file" name="image_url" class="form-control" value="">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="image">Image</label>
+              <input type="file" name="image_url" class="form-control" value="">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="customer_id">Customer</label>
+              <input type="number" name="customer_id" class="form-control" value="">
+            </div>
+          </div>
         </div>
 
         <div class="form-group">

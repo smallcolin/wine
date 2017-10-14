@@ -48,6 +48,7 @@ class WineController extends Controller
         'name' => 'required|max:20',
         'description' => 'required|max:191',
         'country_id' => 'required',
+        'customer_id' => 'required',
         'price' => 'required',
         'stock' => 'required',
         'image_url' => 'required',
@@ -61,6 +62,7 @@ class WineController extends Controller
       // Send data to database
       $wine = Wine::create([
         'country_id' => request()->country_id,
+        'customer_id' => request()->customer_id,
         'name' => request()->name,
         'description' => request()->description,
         'price' => request()->price,
@@ -92,6 +94,7 @@ class WineController extends Controller
         'country_id' => 'required',
         'price' => 'required',
         'stock' => 'required',
+        'approved' => 'required',
         'image_url' => 'required'
       ]);
       // Create image details
@@ -107,6 +110,7 @@ class WineController extends Controller
       $wine->country_id = request()->country_id;
       $wine->price = request()->price;
       $wine->stock = request()->stock;
+      $wine->approved = request()->approved;
       $wine->image_url = request()->image_url;
       // Save to database
       $wine->save();

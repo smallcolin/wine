@@ -30,10 +30,24 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="image">Image</label>
-          <input type="file" name="image_url" class="form-control">
-          <img style="width: 100px; height: 70px; margin-top: 10px;" src="{{$wine->image_url}}" alt="">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="image_url">Image</label>
+              <input type="file" name="image_url" class="form-control">
+              <img style="width: 100px; height: 70px; margin-top: 10px;" src="{{$wine->image_url}}" alt="">
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="approved">Approved</label><br />
+              Yes
+              <input type="radio" name="approved" value="1">
+              No
+              <input type="radio" name="approved" value="0">
+            </div>
+          </div>
         </div>
 
         <div class="form-group">

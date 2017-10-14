@@ -3,9 +3,29 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Customer extends Model
+class Customer extends Authenticatable
 {
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+      'name', 'email', 'password',
+  ];
+
+  /**
+   * The attributes that should be hidden for arrays.
+   *
+   * @var array
+   */
+  protected $hidden = [
+      'password', 'remember_token',
+  ];
+
+  // RELATIONSHIPS
   public function comments()
   {
     return $this->hasMany(Comment::class);
@@ -18,6 +38,6 @@ class Customer extends Model
 
   public function wines()
   {
-    $this->hasMany(Wine::class);
+    return $this->hasMany(Wine::class);
   }
 }

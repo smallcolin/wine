@@ -11,11 +11,11 @@ class Wine extends Model
     return $this->belongsTo(Country::class)->withDefault();
   }
 
-  public function customers()
+  public function customer()
   {
-    $this->belongsTo(Customer::class)->withDefault();
+    return $this->belongsTo(Customer::class)->withDefault();
   }
-  
+
   public function comments()
   {
     return $this->hasMany(Comment::class);
@@ -27,6 +27,6 @@ class Wine extends Model
   }
 
   protected $fillable = [
-      'name', 'description', 'country_id', 'price', 'stock', 'image_url'
+      'name', 'description', 'country_id', 'customer_id', 'price', 'stock', 'image_url', 'approved'
   ];
 }

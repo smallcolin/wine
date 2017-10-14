@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Wine;
 use App\Country;
 use App\Comment;
+use App\Order;
 use Illuminate\Http\Request;
 use Session;
 
@@ -13,26 +14,29 @@ class WineController extends Controller
     // Show all wines
     public function index()
     {
+      // Get all data from table
       $wines = Wine::all();
-
+      // Show the list
       return view('admin.wines.index')->with('wines', $wines);
     }
 
     public function showOne($id)
     {
+      // Find wine based on id
       $wine = Wine::findOrFail($id);
 
       // Get all comments associated with a particular wine
       $comments = $wine->comments()->with('customer')->get();
       // Get the average grade for each wine
       $rating = "5 stars";
-
+      // Show the data
       return view('store.wines.showOneWine')->with('wine', $wine)->with('comments', $comments)->with('rating', $rating);
     }
 
     // Create new wine
     public function create()
     {
+      // Show a form
       return view('customers.wines.createWine')->with('countries', Country::all());
     }
 
@@ -73,13 +77,15 @@ class WineController extends Controller
 
     public function edit(Wine $wine)
     {
+      // Get all the data from table
       $countries = Country::all();
-
+      // Display it onscreen
       return view('admin.wines.edit')->with('wine', $wine)->with('countries', $countries);
     }
 
     public function update($id)
     {
+      // Validate entered data
       $this->validate(request(), [
         'name' => 'required|max:30',
         'description' => 'required',
@@ -114,11 +120,27 @@ class WineController extends Controller
 
     public function delete($id)
     {
+      // Find a wine via its id
       $wine = Wine::findOrFail($id);
+
+      // Check if wine features on an order
+      $wineOnOrder = Order::where('wine_id', $id)->get();
+
+      // Disable delete if any orders are found with that wine_id
+      if (count($wineOnOrder) > 0) {
+        // Display a message
+        Session::flash('error', 'You can\'t delete a wine that is attached to an order!');
+        // Redirect to same page
+        return redirect()->back();
+      }
+
+      // Delete from table
       $wine->delete();
 
+      // Display a message
       Session::flash('success', 'Wine deleted successfully');
 
+      // Redirect user to wines page
       return redirect()->route('wine.show');
     }
 

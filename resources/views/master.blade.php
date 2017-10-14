@@ -92,7 +92,7 @@
                 <div class="col-md-3">
                   <div class="list-group text-center">
                     <ul>
-                      <a href="#">
+                      <a href="{{route('store.wines.showAll')}}">
                         <li class="list-group-item">
                           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                           Store
@@ -115,6 +115,12 @@
                         <li class="list-group-item">
                           <i class="fa fa-user" aria-hidden="true"></i>
                           Customer
+                        </li>
+                      </a>
+                      <a href="">
+                        <li class="list-group-item">
+                          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                          Checkout
                         </li>
                       </a>
                     </ul>

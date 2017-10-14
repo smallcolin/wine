@@ -24,7 +24,7 @@
           <a href="{{route('comment.show')}}">Comments</a>
         </li>
         <li class="list-group-item">
-          <a href="">Orders</a>
+          <a href="{{route('order.show')}}">Orders</a>
         </li>
         <li class="list-group-item">
           <a href="">Export</a>

@@ -14,6 +14,11 @@
 Route::get('/', function () {
     return view('master');
 });
+// Show shop 
+Route::get('/', [
+  'uses' => 'WineController@showAll',
+  'as' => 'store.wines.showAll'
+]);
 
 // Auth routes
 Auth::routes();

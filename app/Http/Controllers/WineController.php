@@ -20,6 +20,16 @@ class WineController extends Controller
       return view('admin.wines.index')->with('wines', $wines);
     }
 
+    // Show all wines
+    public function showAll()
+    {
+      // Get all data from table
+      $wines = Wine::all();
+      
+      // Show the list
+      return view('store.wines.showAll')->with('wines', $wines);
+    }
+
     public function showOne($id)
     {
       // Find wine based on id

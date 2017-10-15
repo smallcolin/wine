@@ -25,7 +25,7 @@ class WineController extends Controller
     {
       // Get all data from table
       $wines = Wine::all();
-      
+
       // Show the list
       return view('store.wines.showAll')->with('wines', $wines);
     }
@@ -37,7 +37,7 @@ class WineController extends Controller
 
       // Get all comments associated with a particular wine
       $comments = $wine->comments()->with('customer')->get();
-      // Get the average grade for each wine
+      // Get the average rating for each wine
       $rating = "5 stars";
       // Show the data
       return view('store.wines.showOneWine')->with('wine', $wine)->with('comments', $comments)->with('rating', $rating);

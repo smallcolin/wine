@@ -25,19 +25,19 @@
         </div>
 
         <div class="form-group">
-          <label for="grade">Grade</label>
+          <label for="rating">Rating</label>
           @php
-            $prevGrade = $comment->grade;
+            $prevRating = $comment->rating;
             for ($i=1; $i < 6; $i++) {
-              if ($i == $prevGrade) {
+              if ($i == $prevRating) {
                 echo '<label class="checkbox-inline">';
-                echo '<input name="grade" type="radio" checked="checked" value="';
+                echo '<input name="rating" type="radio" checked="checked" value="';
                 echo $i;
                 echo '">' . ' ' . $i . ' ';
                 echo '</label>';
               } else {
                 echo '<label class="checkbox-inline">';
-                echo '<input name="grade" type="radio" value="';
+                echo '<input name="rating" type="radio" value="';
                 echo $i;
                 echo '">' . ' ' . $i . ' ';
                 echo '</label>';

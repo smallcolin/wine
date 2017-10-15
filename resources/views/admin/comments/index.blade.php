@@ -17,11 +17,11 @@
     <tbody>
       @foreach ($comments as $comment)
         <tr>
-          <td><a href="{{route('wine.showOne', ['id' => $comment->wine_id])}}">{{$comment->wine->name}}</a></td> <!--names needed-->
+          <td><a href="{{route('wine.showOne', ['id' => $comment->wine_id])}}">{{$comment->wine->name}}</a></td>
           <td>{{$comment->title}}</td>
           <td>{{$comment->body}}</td>
-          <td>{{$comment->customer->name}}</td> <!--names needed-->
-          <td>{{$comment->grade}}</td>
+          <td>{{$comment->customer->name}}</td>
+          <td>{{$comment->rating}}</td>
           <td>
             <a class="btn-sm btn-info" href="{{route('comment.edit', ['comment' => $comment->id])}}">
               Edit

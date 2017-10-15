@@ -17,6 +17,6 @@ class Comment extends Model
   }
 
   protected $fillable = [
-      'wine_id', 'customer_id', 'title', 'body', 'grade'
+      'wine_id', 'customer_id', 'title', 'body', 'rating'
   ];
 }

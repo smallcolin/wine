@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->integer('customer_id');
             $table->string('title', 50);
             $table->text('body');
-            $table->integer('grade');
+            $table->integer('rating');
             $table->timestamps();
         });
     }

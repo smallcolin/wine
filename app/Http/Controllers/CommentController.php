@@ -28,7 +28,7 @@ class CommentController extends Controller
         'customer_id' => 'required',
         'title' => 'required|max:40',
         'body' => 'required|max:100',
-        'grade' => 'required',
+        'rating' => 'required',
       ]);
 
       // Need to convert customer_id  string obtained into an id
@@ -39,7 +39,7 @@ class CommentController extends Controller
         'customer_id' => request()->customer_id,
         'title' => request()->title,
         'body' => request()->body,
-        'grade' => request()->grade,
+        'rating' => request()->rating,
       ]);
 
       // Onscreen message
@@ -130,7 +130,7 @@ class CommentController extends Controller
         'wine_id' => 'required',
         'title' => 'required|max:40',
         'body' => 'required|max:191',
-        'grade' => 'required',
+        'rating' => 'required',
       ]);
       // Find id from database
       $comment = Comment::findOrFail($id);
@@ -138,7 +138,7 @@ class CommentController extends Controller
       $comment->wine_id = request()->wine_id;
       $comment->title = request()->title;
       $comment->body = request()->body;
-      $comment->grade = request()->grade;
+      $comment->rating = request()->rating;
       // Save to database
       $comment->save();
 

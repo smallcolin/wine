@@ -60,7 +60,7 @@ $factory->define(App\Comment::class, function (Faker $faker) {
       'wine_id' => $faker->randomDigit,
       'title' => $faker->word,
       'body' => $faker->text($maxNbChars = 200),
-      'grade' => $faker->numberBetween($min=1, $max=5)
+      'rating' => $faker->numberBetween($min=1, $max=5)
     ];
 });
 

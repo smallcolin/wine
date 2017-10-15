@@ -8,7 +8,7 @@
         <th>Title</th>
         <th>Words</th>
         <th>Wine</th>
-        <th>Grade</th>
+        <th>Rating</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -23,7 +23,7 @@
               {{$comment->wine->name}}
             </a>
           </td>
-          <td>{{$comment->grade}}</td>
+          <td>{{$comment->rating}}</td>
           <td>
             <a class="btn-sm btn-info" href="{{route('customerComment.edit', ['comment' => $comment->id])}}">
               Edit

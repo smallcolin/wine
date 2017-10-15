@@ -22,6 +22,10 @@
                 margin: 0;
             }
 
+            a {
+              color: crimson;
+            }
+
             .full-height {
                 height: 100vh;
             }
@@ -95,7 +99,7 @@
                       <a href="{{route('store.wines.showAll')}}">
                         <li class="list-group-item">
                           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                          Store
+                          Shop
                         </li>
                       </a>
                       <a href="#">

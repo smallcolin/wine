@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('master');
 });
-// Show shop 
+// Show shop
 Route::get('/', [
   'uses' => 'WineController@showAll',
   'as' => 'store.wines.showAll'
@@ -111,7 +111,16 @@ Route::get('/home', 'HomeController@index')->name('home');
     'as' => 'comment.update'
   ]);
 
-
+  // Export CSV files
+  // Basic admin page
+  Route::get('/export', function () {
+      return view('admin/export/exportCsv');
+  });
+  // Make CSV file and export it
+  Route::post('/export/data', [
+    'uses' => 'ExportController@exportCSV',
+    'as' => 'export.createCsvFile'
+  ]);
 
 
 

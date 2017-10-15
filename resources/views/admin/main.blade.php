@@ -27,7 +27,7 @@
           <a href="{{route('order.show')}}">Orders</a>
         </li>
         <li class="list-group-item">
-          <a href="">Export</a>
+          <a href="/export">Export</a>
         </li>
       </ul>
     </div>

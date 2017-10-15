@@ -218,3 +218,8 @@ Route::get('/home', 'HomeController@index')->name('home');
     'uses' => 'WineController@showOne',
     'as' => 'wine.showOne'
   ]);
+  // Filter wines by country
+  Route::get('/wines/{country}/filter', [
+    'uses' => 'WineController@filterWine',
+    'as' => 'wine.filter',
+  ]);

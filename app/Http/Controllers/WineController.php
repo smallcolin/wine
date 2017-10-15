@@ -6,12 +6,13 @@ use App\Wine;
 use App\Country;
 use App\Comment;
 use App\Order;
+use App\Customer;
 use Illuminate\Http\Request;
 use Session;
 
 class WineController extends Controller
 {
-    // Show all wines
+    // Show all wines (admin)
     public function index()
     {
       // Get all data from table
@@ -20,16 +21,19 @@ class WineController extends Controller
       return view('admin.wines.index')->with('wines', $wines);
     }
 
-    // Show all wines
+    // Show all wines (customer shop)
     public function showAll()
     {
       // Get all data from table
       $wines = Wine::all();
+      // Get all data for a country filter list
+      $countries = Country::all();
 
-      // Show the list
-      return view('store.wines.showAll')->with('wines', $wines);
+      // Show the list and send some data with…
+      return view('store.wines.showAll')->with('wines', $wines)->with('countries', $countries);
     }
 
+    // Show an individual wine
     public function showOne($id)
     {
       // Find wine based on id
@@ -42,6 +46,18 @@ class WineController extends Controller
       // Show the data
       return view('store.wines.showOneWine')->with('wine', $wine)->with('comments', $comments)->with('rating', $rating);
     }
+
+    // Filter wines
+    public function filterWine(Country $country)
+    {
+      // Get all data from countries table
+      $countries = Country::all();
+      // Redirect browser
+      return view('store.wines.showAllFilter')->with('countries', $countries)->with('country', $country);
+
+
+    }
+
 
     // Create new wine
     public function create()

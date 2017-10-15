@@ -2,23 +2,23 @@
 
 @section('content')
   <h3>Shop</h3>
-  <h5>Filter wine by country…</h5>
+  <h5>Wines from {{$country->name}}</h5>
   {{-- Country Filter --}}
-  <ul class=" text-center">
-    <a style="margin-bottom:5px;" class="btn btn-sm btn-danger" href="/">
+  <ul class="text-center">
+    <a style="margin-bottom:5px;"  class="btn btn-sm btn-danger" href="/">
       <li style="display:inline-block; padding: 0 5px;"><strong>Show All</strong></li>
     </a>
-    @foreach ($countries as $country)
-      <a style="margin-bottom:5px;" class="btn btn-sm btn-outline-danger" href="{{route('wine.filter', ['country' => $country->id])}}">
+    @foreach ($countries as $countryFilter)
+      <a style="margin-bottom:5px;" class="btn btn-sm btn-outline-danger" href="{{route('wine.filter', ['countryFilter' => $countryFilter->id])}}">
         <li style="display:inline-block; padding: 0 5px;">
-          {{$country->name}}
+          {{$countryFilter->name}}
         </li>
       </a>
     @endforeach
   </ul>
 
   <div class="row">
-    @foreach ($wines as $wine)
+    @foreach ($country->wines as $wine)
       @if ($wine->approved == 1)
         <div class="col-md-3">
           <ul class="list-group" style="margin: 20px 0;">

@@ -137,7 +137,7 @@ class WineController extends Controller
       $wine->price = request()->price;
       $wine->stock = request()->stock;
       $wine->approved = request()->approved;
-      $wine->image_url = request()->image_url;
+      $wine->image_url = 'uploads/' . $new_name;
       // Save to database
       $wine->save();
 

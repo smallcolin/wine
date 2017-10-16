@@ -10,7 +10,7 @@
             <li>
               Average Rating:
               @php
-              echo $rating;
+              echo round($rating);
               @endphp
             </li>
             <li>&nbsp<!--Empty Row--></li>
@@ -64,7 +64,8 @@
           <ul style="list-style: none;padding:0;">
             <li><strong>{{$comment->title}}</strong></li>
             <li>{{$comment->body}}</li>
-            <li>Written by {{$comment->customer->name}}
+            <li>Written by {{$comment->customer->name}}</li>
+            <li>Rating: {{$comment->rating}}</li>
               @php
                 $time = strtotime($comment->created_at);
                 $newTime = date("m/d/y, G:i", $time);
@@ -113,7 +114,7 @@
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        
+
       @endauth
     </div>
   </div>

@@ -41,8 +41,11 @@ class WineController extends Controller
 
       // Get all comments associated with a particular wine
       $comments = $wine->comments()->with('customer')->get();
+
       // Get the average rating for each wine
-      $rating = "5 stars";
+      // $rating = "5 stars";
+      $rating = $wine->comments()->with('customer')->avg('rating');
+
       // Show the data
       return view('store.wines.showOneWine')->with('wine', $wine)->with('comments', $comments)->with('rating', $rating);
     }

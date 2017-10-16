@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
-class LoginController extends Controller
+use Illuminate\Support\Facades\Auth;
+class CustomerLoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -17,16 +15,13 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
     use AuthenticatesUsers;
-
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
     protected $redirectTo = '/';
-
     /**
      * Create a new controller instance.
      *
@@ -35,5 +30,13 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    public function guard()
+    {
+      return Auth::guard('customer');
+    }
+    public function showLoginForm()
+    {
+        return view('auth.customerLogin');
     }
 }

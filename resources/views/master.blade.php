@@ -74,12 +74,25 @@
         <div class="flex-center position-ref">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                  {{-- @php
+                  dd(Auth::guard('customer')->user());
+                  @endphp --}}
+                    @if(Auth::user() || Auth::guard('customer')->user())
+                      Customer: {{ Auth::guard('customer')->user()->name }}
+                        {{-- <a href="{{ url('/home') }}">Logout</a> --}}
+                        <a href="{{ route('customers.logout') }}"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('customers.logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
-                    @endauth
+                    @endif
                 </div>
             @endif
         </div>
@@ -96,6 +109,7 @@
                 <div class="col-md-3">
                   <div class="list-group text-center">
                     <ul>
+
                       <a href="{{route('store.wines.showAll')}}">
                         <li class="list-group-item">
                           <i class="fa fa-shopping-cart" aria-hidden="true"></i>

@@ -98,7 +98,7 @@ class CommentController extends Controller
     public function showCustomerComment()
     {
       $wine = Wine::all();
-      $id = Auth::id();  // Needs an id from the logged-in user
+      $id = Auth::guard('customer')->user()->id;  // Needs an id from the logged-in user
       $comments = Comment::where('customer_id', $id)->get();
 
       return view('customers.comments.index')->with('comments', $comments)->with('wine', $wine);

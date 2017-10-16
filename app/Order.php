@@ -8,6 +8,6 @@ class Order extends Model
 {
   public function wine()
   {
-    return $this->belongsTo(Wine::class)->withDefault();
+    return $this->belongsToMany(Wine::class);
   }
 }

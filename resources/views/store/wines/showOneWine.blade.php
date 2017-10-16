@@ -76,31 +76,31 @@
       @endforeach
     </div>
     <div class="col-sm-6">
-      <h3>Leave a comment…</h3>
-      <form action="{{route('comment.store')}}" method="post">
-        {{ csrf_field() }}
-        <input type="hidden" name="wine_id" value="{{$wine->id}}">
-        <input type="hidden" name="customer_id" value="">  <!--Need logged in user id to fill in value-->
-        <div class="form-group">
-          <label for="customer_id">Name</label>
-          <input type="text" class="form-control" name="customer_id"> <!--Delete later-->
-          <h5></h5>  <!--Need logged in user id to fill in name-->
-        </div>
+      @auth ('customer')
+        <h3>Leave a comment…</h3>
+        <form action="{{route('comment.store')}}" method="post">
+          {{ csrf_field() }}
+          <input type="hidden" name="wine_id" value="{{$wine->id}}">
+          <input type="hidden" name="customer_id" value="{{Auth::guard('customer')->user()->id}}">
+          <div class="form-group">
+            <label for="customer_id">Name</label>
+            <h5>{{Auth::guard('customer')->user()->name}}</h5>  <!--Need logged in user id to fill in name-->
+          </div>
 
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input type="text" class="form-control" name="title">
-        </div>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title">
+          </div>
 
-        <div class="form-group">
-          <label for="body">Your words?</label>
-          <textarea class="form-control" name="body" rows="2" cols="50"></textarea>
-        </div>
+          <div class="form-group">
+            <label for="body">Your words?</label>
+            <textarea class="form-control" name="body" rows="2" cols="50"></textarea>
+          </div>
 
-        <div class="form-group">
-          <label for="rating">Rating</label>
+          <div class="form-group">
+            <label for="rating">Rating</label>
 
-          @php
+            @php
             for ($i=1; $i < 6; $i++) {
               echo '<label class="checkbox-inline">';
               echo '<input name="rating" type="radio" value="';
@@ -108,11 +108,13 @@
               echo '">' . ' ' . $i . ' ';
               echo '</label>';
             }
-          @endphp
+            @endphp
 
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        
+      @endauth
     </div>
   </div>
 @endsection

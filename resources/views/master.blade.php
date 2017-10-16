@@ -135,7 +135,7 @@
                           Customer
                         </li>
                       </a>
-                      <a href="">
+                      <a href="/checkout">
                         <li class="list-group-item">
                           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                           Checkout

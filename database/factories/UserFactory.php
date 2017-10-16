@@ -80,9 +80,8 @@ $factory->define(App\Order::class, function (Faker $faker) {
     static $password;
 
     return [
-      'user_name' => $faker->name,
-      'user_email' => $faker->unique()->safeEmail,
-      'wine_name' => $faker->name,
+      'order_id' => $faker->numberBetween($min=1, $max=10),
+      'customer_id' => $faker->numberBetween($min=1, $max=3),
       'wine_id' => $faker->numberBetween($min=1, $max=10),
     ];
 });

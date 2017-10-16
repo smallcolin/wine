@@ -17,6 +17,16 @@ class OrderController extends Controller
       return view('admin.orders.index')->with('orders', $orders);
     }
 
+    // Show all orders
+    public function checkoutIndex()
+    {
+      $id = 4;
+      // Find wine based on id
+      $order = Order::findOrFail($id);
+
+      return view('store.checkout.index')->with('order', $order);
+    }
+
     // Create an order
     public function create()
     {

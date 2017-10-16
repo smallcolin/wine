@@ -223,3 +223,10 @@ Route::get('/home', 'HomeController@index')->name('home');
     'uses' => 'WineController@filterWine',
     'as' => 'wine.filter',
   ]);
+
+  // CHECKOUT Routes
+  // Basic page
+  Route::get('/checkout', [
+    'uses' => 'OrderController@checkoutIndex',
+    'as' => 'checkout.show',
+  ]);

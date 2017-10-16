@@ -5,7 +5,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
+        <th>Customer Name</th>
         <th>Email</th>
         <th>Order Number</th>
         <th>Wine</th>
@@ -15,12 +15,12 @@
     <tbody>
       @foreach ($orders as $order)
       <tr>
-        <td>{{$order->user_name}}</td>
-        <td>{{$order->user_email}}</td>
+        <td>{{$order->customer->name}}</td>
+        <td>{{$order->customer->email}}</td>
         <td>{{$order->id}}</td>
         <td>
           <a href="{{route('wine.showOne', ['id' => $order->wine_id])}}">
-            {{$order->wine->name}}
+            {{$order->wine_id}}  <!--Wine name here-->
           </a>
         </td>
         <td>

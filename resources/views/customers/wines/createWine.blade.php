@@ -39,8 +39,9 @@
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="customer_id">Customer</label>
-              <input type="number" name="customer_id" class="form-control" value="">
+              <label for="customer_id">Customer</label><br />
+              <h5>{{Auth::guard('customer')->user()->name}}</h5>
+              <input type="hidden" name="customer_id" value="{{Auth::guard('customer')->user()->id}}">
             </div>
           </div>
         </div>

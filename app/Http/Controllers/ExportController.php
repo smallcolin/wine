@@ -12,34 +12,56 @@ use Session;
 
 class ExportController extends Controller
 {
-  public function exportCSV()
+  private function exportCSV($collection)
+  {
+    // Create headers for exported file
+    header('Content-Disposition: attachment; filename="export.csv"');
+    header("Cache-control: private");
+    header("Content-type: application/force-download");
+    header("Content-transfer-encoding: binary\n");
+
+    $data = $collection->toArray();
+
+    $out = fopen('php://output', 'w');
+
+    fputcsv($out, array_keys($data[0]));
+    foreach($data as $line)
+    {
+      fputcsv($out, $line);
+    }
+    fclose($out);
+  }
+
+  public function download()
   {
     // Receive the chosen table data number
-    $data = request()->tableToExport;
+    $collection = request()->tableToExport;
 
-    // Perform the task 
-    switch ($data) {
+    // Perform the task
+    switch ($collection) {
       case 1:
-      echo 'You chose the Comments table';
+      $this->exportCSV(Comment::all());
       break;
       case 2:
-      echo 'You chose the Countries table';
+      $this->exportCSV(Country::all());
       break;
       case 3:
-      echo 'You chose the Customers table';
+      $this->exportCSV(Customer::all());
       break;
       case 4:
-      echo 'You chose the Orders table';
+      $this->exportCSV(Order::all());
       break;
       case 5:
-      echo 'You chose the Wines table';
+      $this->exportCSV(Wine::all());
       break;
     }
-
-    // Dispplay a message
-    Session('success', 'The CSV file was create successfully');
-    // Send the user back
-    redirect()->back();
   }
+
+
+
+
+
+
+
 
 }

@@ -118,7 +118,7 @@ Route::get('/home', 'HomeController@index')->name('home');
   });
   // Make CSV file and export it
   Route::post('/export/data', [
-    'uses' => 'ExportController@exportCSV',
+    'uses' => 'ExportController@download',
     'as' => 'export.createCsvFile'
   ]);
 
@@ -191,7 +191,7 @@ Route::get('/home', 'HomeController@index')->name('home');
     'as' => 'order.delete'
   ]);
 
-
+// Route::resource('wine', 'WineController');
 // Wine Routes
   // Show all Wines
   Route::get('/wines', [

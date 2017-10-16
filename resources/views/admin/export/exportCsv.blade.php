@@ -9,7 +9,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <select class="form-control" name="tableToExport">
-            <option value="1">Comments</option>
+            <option value="Comment">Comments</option>
             <option value="2">Countries</option>
             <option value="3">Customers</option>
             <option value="4">Orders</option>

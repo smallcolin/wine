@@ -127,7 +127,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // CUSTOMER ROUTES
-
   // Login pages
   Route::get('/customers/login', [
     'uses' => 'Auth\CustomerLoginController@showLoginForm',
@@ -240,4 +239,41 @@ Route::get('/home', 'HomeController@index')->name('home');
   Route::get('/checkout', [
     'uses' => 'OrderController@checkoutIndex',
     'as' => 'checkout.show',
+  ]);
+
+
+  // Images upload
+  // Main page link
+  Route::get('/gallery', function () {
+      return view('gallery.main');
+  });
+  // Show all images (admin)
+  Route::get('/admin/images', [
+    'uses' => 'ImagesController@adminShowImages',
+    'as' => 'adminImages.show',
+  ]);
+  // Upload and save images
+  Route::post('/gallery/store', [
+    'uses' => 'ImagesController@store',
+    'as' => 'gallery.store'
+  ]);
+  // Show all Images (Gallery)
+  Route::get('/gallery', [
+    'uses' => 'ImagesController@index',
+    'as' => 'gallery.show',
+  ]);
+  // Delete an image
+  Route::get('/admin/comments/{id}/delete', [
+    'uses' => 'ImagesController@delete',
+    'as' => 'galleryImage.delete'
+  ]);
+  // Edit an image
+  Route::get('/admin/image/{image}/edit', [
+    'uses' => 'ImagesController@edit',
+    'as' => 'galleryImage.edit'
+  ]);
+  // Update a image
+  Route::post('/admin/image/{id}/update', [
+    'uses' => 'ImagesController@update',
+    'as' => 'galleryImage.update'
   ]);

@@ -116,19 +116,21 @@
                           Shop
                         </li>
                       </a>
-                      <a href="#">
+                      <a href="/gallery">
                         <li class="list-group-item">
                           <i class="fa fa-picture-o" aria-hidden="true"></i>
                           Gallery
                         </li>
                       </a>
+                    @auth
                       <a href="/admin">
                         <li class="list-group-item">
                           <i class="fa fa-user-plus" aria-hidden="true"></i>
                           Admin
                         </li>
                       </a>
-                      </a>
+                    @endauth
+                    @auth ('customer')
                       <a href="/customer">
                         <li class="list-group-item">
                           <i class="fa fa-user" aria-hidden="true"></i>
@@ -141,6 +143,7 @@
                           Checkout
                         </li>
                       </a>
+                    @endauth
                     </ul>
                   </div>
                 </div>

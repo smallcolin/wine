@@ -29,6 +29,9 @@
         <li class="list-group-item">
           <a href="/export">Export</a>
         </li>
+        <li class="list-group-item">
+          <a href="{{route('adminImages.show')}}">Gallery</a>
+        </li>
       </ul>
     </div>
   </div>

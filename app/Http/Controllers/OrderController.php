@@ -43,30 +43,6 @@ class OrderController extends Controller
       dd($items);
     }
 
-    // Show an indivual order
-    public function showOneOrder(Order $order)
-    {
-        //
-    }
-
-
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
     // Delete an order
     public function delete($id)
     {
@@ -81,5 +57,33 @@ class OrderController extends Controller
 
       // redirect to all countries page
       return redirect()->route('order.show');
+    }
+
+    // Process an Order
+    public function purchase()
+    {
+
+      // Validate & Get all stuff ready for sending to database
+      $this->validate(request(), [
+        'customer_id' => 'required',
+        'order_id' => 'required',
+      ]);
+
+      // Send data to database table
+      $order = Order::create([
+        'customer_id' => request()->customer_id,
+        'order_id' => request()->order_id,
+      ]);
+
+      // Payment type
+      $payment = request()->payment;
+
+      // Get total cost
+      $total = request()->total;
+
+      // Onscreen message
+      Session::flash('success', 'Order has been processed');
+      // Show purchase complete page
+      return view('store.checkout.complete')->with('order', $order)->with('payment', $payment)->with('total', $total);
     }
 }

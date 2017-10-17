@@ -15,4 +15,6 @@ class Order extends Model
   {
     return $this->belongsTo(Customer::class)->withDefault();
   }
+
+  protected $fillable = ['customer_id', 'order_id'];
 }

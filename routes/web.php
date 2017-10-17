@@ -195,6 +195,12 @@ Route::get('/home', 'HomeController@index')->name('home');
     'uses' => 'OrderController@store',
     'as' => 'order.store'
   ]);
+  // Purchase Route
+  Route::post('/orders/purchase', [
+    'uses' => 'OrderController@purchase',
+    'as' => 'order.purchase',
+  ]);
+
 
 // Route::resource('wine', 'WineController');
 // Wine Routes

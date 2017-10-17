@@ -14,15 +14,25 @@
           <th>Amount</th>
           <th>Total</th>
         </thead>
+        <tbody>
+          @foreach ($order->wines as $wine)
+            <tr>
+              <td>{{$wine->name}}</td>
+              <td>{{round($wine->price)}}</td>
+              <td>{{count($wine->id)}}</td>
+              <td>{{round($wine->price)}}</td>
+            </tr>
+          @endforeach
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{round($total)}}</td>
+          </tr>
+        </tfoot>
       </table>
-      <tbody>
-        <tr>
-          <td></td>  <!--Wine Name-->
-          <td></td> <!--Wine Price-->
-          <td>{{count($order->wine_id)}}</td>
-          <td></td>
-        </tr>
-      </tbody>
     </div>
   </div>
   <hr />

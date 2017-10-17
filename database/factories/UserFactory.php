@@ -81,6 +81,6 @@ $factory->define(App\Order::class, function (Faker $faker) {
 
     return [
       'customer_id' => $faker->numberBetween($min=1, $max=3),
-      'wine_id' => $faker->numberBetween($min=1, $max=10),
+      'order_id' => $faker->numberBetween($min=1, $max=5),
     ];
 });

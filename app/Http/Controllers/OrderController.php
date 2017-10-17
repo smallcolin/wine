@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use Illuminate\Http\Request;
-
 use Session;
 
 class OrderController extends Controller
@@ -21,11 +20,14 @@ class OrderController extends Controller
     public function checkoutIndex()
     {
       $id = 1;
-      // Find wine based on id
+      // Find wines based on order id
       $order = Order::findOrFail($id);
-      // dd($order);
 
-      return view('store.checkout.index')->with('order', $order);
+      // Get total cost
+      $total = $order->wines()->sum('price');
+
+      // Show page
+      return view('store.checkout.index')->with('order', $order)->with('total', $total);
     }
 
     // Create an order
@@ -35,9 +37,10 @@ class OrderController extends Controller
     }
 
     // Save an order
-    public function store()
+    public function store($id)
     {
-
+      $items = Cart::add($id);
+      dd($items);
     }
 
     // Show an indivual order

@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-  public function wine()
+  public function wines()
   {
-    return $this->belongsToMany(Wine::class)->withDefault();
+    return $this->belongsToMany(Wine::class);
   }
 
   public function customer()

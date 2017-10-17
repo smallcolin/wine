@@ -8,7 +8,7 @@
         <th>Customer Name</th>
         <th>Email</th>
         <th>Order Number</th>
-        <th>Wine</th>
+        <th>Wine(s)</th>
         <th>Delete</th>
       </tr>
     </thead>
@@ -19,9 +19,16 @@
         <td>{{$order->customer->email}}</td>
         <td>{{$order->id}}</td>
         <td>
-          <a href="{{route('wine.showOne', ['id' => $order->wine_id])}}">
-            {{$order->wine_id}}  <!--Wine name here-->
-          </a>
+          <ul style="list-style:none;padding:0;">
+            @foreach ($order->wines as $wine)
+              <li>
+                <a href="{{route('wine.showOne', ['id' => $order->wine_id])}}">
+                  {{$wine->name}}
+                </a>
+              </li>
+            @endforeach
+          </ul>
+
         </td>
         <td>
           <a class="btn-sm btn-danger" href="{{route('order.delete', ['id' => $order->id])}}">

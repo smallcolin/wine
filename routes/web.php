@@ -190,6 +190,11 @@ Route::get('/home', 'HomeController@index')->name('home');
     'uses' => 'OrderController@delete',
     'as' => 'order.delete'
   ]);
+  // Create an order
+  Route::get('/order/{id}/store', [
+    'uses' => 'OrderController@store',
+    'as' => 'order.store'
+  ]);
 
 // Route::resource('wine', 'WineController');
 // Wine Routes

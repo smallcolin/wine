@@ -20,9 +20,10 @@ class OrderController extends Controller
     // Show all orders
     public function checkoutIndex()
     {
-      $id = 4;
+      $id = 1;
       // Find wine based on id
       $order = Order::findOrFail($id);
+      // dd($order);
 
       return view('store.checkout.index')->with('order', $order);
     }
@@ -30,13 +31,13 @@ class OrderController extends Controller
     // Create an order
     public function create()
     {
-        //
+
     }
 
     // Save an order
-    public function store(Request $request)
+    public function store()
     {
-        //
+
     }
 
     // Show an indivual order

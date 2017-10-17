@@ -18,7 +18,7 @@
               <a href="/" class="btn btn-outline-info">
                 Back to Store
               </a>
-              <a href="" class="btn btn-outline-success">
+              <a href="{{route('order.store', ['id' => $wine->id])}}" class="btn btn-outline-success">
                 Add to Cart
               </a>
             </li>

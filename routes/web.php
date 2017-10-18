@@ -26,9 +26,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // ADMIN ROUTES
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
   // Main admin page
   Route::get('/admin', function () {
-      return view('admin/main');
+    return view('admin/main');
   });
   // Countries
   Route::get('/countries', [
@@ -65,81 +66,135 @@ Route::get('/home', 'HomeController@index')->name('home');
   Route::get('/admin/customers', [
     'uses' => 'CustomerController@index',
     'as' => 'customer.show'
-  ]);
-  // Delete a customer
-  Route::get('/customer/{id}/delete', [
-    'uses' => 'CustomerController@delete',
-    'as' => 'customer.delete'
-  ]);
-  // Edit a customer
-  Route::get('/customer/{customer}/edit', [
-    'uses' => 'CustomerController@edit',
-    'as' => 'customer.edit'
-  ]);
-  // Update a customer
-  Route::post('/customer/{id}/update', [
-    'uses' => 'CustomerController@update',
-    'as' => 'customer.update'
-  ]);
+    ])->middleware('auth');
+    // Delete a customer
+    Route::get('/customer/{id}/delete', [
+      'uses' => 'CustomerController@delete',
+      'as' => 'customer.delete'
+    ]);
+    // Edit a customer
+    Route::get('/customer/{customer}/edit', [
+      'uses' => 'CustomerController@edit',
+      'as' => 'customer.edit'
+    ]);
+    // Update a customer
+    Route::post('/customer/{id}/update', [
+      'uses' => 'CustomerController@update',
+      'as' => 'customer.update'
+      ]);
 
+  // COMMENTS ROUTES
+    // Admin Comments page
+    Route::get('/comments', [
+      'uses' => 'CommentController@index',
+      'as' => 'comment.show'
+    ]);
+    // Save a comment
+    Route::post('/comment/store', [
+      'uses' => 'CommentController@store',
+      'as' => 'comment.store'
+    ]);
+    // Delete Comments
+    Route::get('/comment/{id}/delete', [
+      'uses' => 'CommentController@delete',
+      'as' => 'comment.delete'
+    ]);
+    // Edit a comment
+    Route::get('/comment/{comment}/edit', [
+      'uses' => 'CommentController@edit',
+      'as' => 'comment.edit'
+    ]);
+    // Update a comment
+    Route::post('/comment/{id}/update', [
+      'uses' => 'CommentController@update',
+      'as' => 'comment.update'
+    ]);
 
+    // Export CSV files
+    // Basic admin page
+    Route::get('/export', function () {
+        return view('admin/export/exportCsv');
+    });
+    // Make CSV file and export it
+    Route::post('/export/data', [
+      'uses' => 'ExportController@download',
+      'as' => 'export.createCsvFile'
+    ]);
 
-// COMMENTS ROUTES
-  // Admin Comments page
-  Route::get('/comments', [
-    'uses' => 'CommentController@index',
-    'as' => 'comment.show'
-  ]);
-  // Save a comment
-  Route::post('/comment/store', [
-    'uses' => 'CommentController@store',
-    'as' => 'comment.store'
-  ]);
-  // Delete Comments
-  Route::get('/comment/{id}/delete', [
-    'uses' => 'CommentController@delete',
-    'as' => 'comment.delete'
-  ]);
-  // Edit a comment
-  Route::get('/comment/{comment}/edit', [
-    'uses' => 'CommentController@edit',
-    'as' => 'comment.edit'
-  ]);
-  // Update a comment
-  Route::post('/comment/{id}/update', [
-    'uses' => 'CommentController@update',
-    'as' => 'comment.update'
-  ]);
+    // Admin Order routes
+    // Show all orders
+    Route::get('/orders', [
+      'uses' => 'OrderController@index',
+      'as' => 'order.show'
+    ]);
+    // Delete an order
+    Route::get('/order/{id}/delete', [
+      'uses' => 'OrderController@delete',
+      'as' => 'order.delete'
+    ]);
 
-  // Export CSV files
-  // Basic admin page
-  Route::get('/export', function () {
-      return view('admin/export/exportCsv');
-  });
-  // Make CSV file and export it
-  Route::post('/export/data', [
-    'uses' => 'ExportController@download',
-    'as' => 'export.createCsvFile'
-  ]);
+  // Wine Routes
+    // Show all Wines
+    Route::get('/wines', [
+      'uses' => 'WineController@index',
+      'as' => 'wine.show',
+    ]);
+    // Edit a wine
+    Route::get('/wine/{wine}/edit', [
+      'uses' => 'WineController@edit',
+      'as' => 'wine.edit'
+    ]);
+    // Update a wine
+    Route::post('/wine/{id}/update', [
+      'uses' => 'WineController@update',
+      'as' => 'wine.update'
+    ]);
+    // Delete a wine
+    Route::get('/wine/{id}/delete', [
+      'uses' => 'WineController@delete',
+      'as' => 'wine.delete'
+    ]);
 
+    // Gallery routes
+    // Show all images (admin)
+    Route::get('/admin/images', [
+      'uses' => 'ImagesController@adminShowImages',
+      'as' => 'adminImages.show',
+    ]);
+    // Delete an image
+    Route::get('/admin/comments/{id}/delete', [
+      'uses' => 'ImagesController@delete',
+      'as' => 'galleryImage.delete'
+    ]);
+    // Edit an image
+    Route::get('/admin/image/{image}/edit', [
+      'uses' => 'ImagesController@edit',
+      'as' => 'galleryImage.edit'
+    ]);
+    // Update a image
+    Route::post('/admin/image/{id}/update', [
+      'uses' => 'ImagesController@update',
+      'as' => 'galleryImage.update'
+    ]);
+});
 
-
-
+// CUSTOMER LOGIN ROUTES
+Route::get('/customers/login', [
+  'uses' => 'Auth\CustomerLoginController@showLoginForm',
+  'as' => 'customers.login',
+]);
+Route::post('/customers/login', [
+  'uses' => 'Auth\CustomerLoginController@login',
+  'as' => 'customers.attempt',
+]);
+Route::post('/customers/logout', [
+  'uses' => 'Auth\CustomerLoginController@logout',
+  'as' => 'customers.logout',
+]);
 
 // CUSTOMER ROUTES
+Route::group(['middleware' => 'auth:customer'], function() {
   // Login pages
-  Route::get('/customers/login', [
-    'uses' => 'Auth\CustomerLoginController@showLoginForm',
-    'as' => 'customers.login',
-  ]);
-  Route::post('/customers/login', [
-    'uses' => 'Auth\CustomerLoginController@login',
-    'as' => 'customers.attempt',
-  ]);
-  Route::post('/customers/logout', [
-    'uses' => 'Auth\CustomerLoginController@logout',
-    'as' => 'customers.logout',
-  ]);
 
   // Main customer page
   Route::get('/customer', function () {
@@ -177,18 +232,7 @@ Route::get('/home', 'HomeController@index')->name('home');
   ]);
 
 
-
-// Order Routes
-  // Show all orders
-  Route::get('/orders', [
-    'uses' => 'OrderController@index',
-    'as' => 'order.show'
-  ]);
-  // Delete an order
-  Route::get('/order/{id}/delete', [
-    'uses' => 'OrderController@delete',
-    'as' => 'order.delete'
-  ]);
+  // Order Routes
   // Create an order
   Route::get('/order/{id}/store', [
     'uses' => 'OrderController@store',
@@ -200,29 +244,31 @@ Route::get('/home', 'HomeController@index')->name('home');
     'as' => 'order.purchase',
   ]);
 
+  // Images upload
+  // Main page link
+  Route::get('/gallery', function () {
+      return view('gallery.main');
+  });
 
-// Route::resource('wine', 'WineController');
-// Wine Routes
-  // Show all Wines
-  Route::get('/wines', [
-    'uses' => 'WineController@index',
-    'as' => 'wine.show',
+  // Upload and save images
+  Route::post('/gallery/store', [
+    'uses' => 'ImagesController@store',
+    'as' => 'gallery.store'
   ]);
-  // Edit a wine
-  Route::get('/wine/{wine}/edit', [
-    'uses' => 'WineController@edit',
-    'as' => 'wine.edit'
+
+
+  // CHECKOUT Routes
+  // Basic page
+  Route::get('/checkout', [
+    'uses' => 'OrderController@checkoutIndex',
+    'as' => 'checkout.show',
   ]);
-  // Update a wine
-  Route::post('/wine/{id}/update', [
-    'uses' => 'WineController@update',
-    'as' => 'wine.update'
-  ]);
-  // Delete a wine
-  Route::get('/wine/{id}/delete', [
-    'uses' => 'WineController@delete',
-    'as' => 'wine.delete'
-  ]);
+});
+
+
+
+  // Public Routes
+  //
   // Show one wine
   Route::get('/wines/{id}', [
     'uses' => 'WineController@showOne',
@@ -233,47 +279,8 @@ Route::get('/home', 'HomeController@index')->name('home');
     'uses' => 'WineController@filterWine',
     'as' => 'wine.filter',
   ]);
-
-  // CHECKOUT Routes
-  // Basic page
-  Route::get('/checkout', [
-    'uses' => 'OrderController@checkoutIndex',
-    'as' => 'checkout.show',
-  ]);
-
-
-  // Images upload
-  // Main page link
-  Route::get('/gallery', function () {
-      return view('gallery.main');
-  });
-  // Show all images (admin)
-  Route::get('/admin/images', [
-    'uses' => 'ImagesController@adminShowImages',
-    'as' => 'adminImages.show',
-  ]);
-  // Upload and save images
-  Route::post('/gallery/store', [
-    'uses' => 'ImagesController@store',
-    'as' => 'gallery.store'
-  ]);
   // Show all Images (Gallery)
   Route::get('/gallery', [
     'uses' => 'ImagesController@index',
     'as' => 'gallery.show',
-  ]);
-  // Delete an image
-  Route::get('/admin/comments/{id}/delete', [
-    'uses' => 'ImagesController@delete',
-    'as' => 'galleryImage.delete'
-  ]);
-  // Edit an image
-  Route::get('/admin/image/{image}/edit', [
-    'uses' => 'ImagesController@edit',
-    'as' => 'galleryImage.edit'
-  ]);
-  // Update a image
-  Route::post('/admin/image/{id}/update', [
-    'uses' => 'ImagesController@update',
-    'as' => 'galleryImage.update'
   ]);

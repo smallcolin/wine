@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Customer;
+use Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -62,6 +63,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Session::flash('success', 'Congrats as a registered customer you can now buy stuff in the store.  Login now for the good stuff');
+
         return Customer::create([
             'name' => $data['name'],
             'email' => $data['email'],

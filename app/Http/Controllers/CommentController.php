@@ -14,8 +14,9 @@ class CommentController extends Controller
     // Show all comments
     public function index()
     {
+      // Collect all entries from database table
       $comments = Comment::all();
-
+      // Direct browser to a page
       return view('admin.comments.index')->with('comments', $comments);
     }
 
@@ -86,39 +87,48 @@ class CommentController extends Controller
     // Delete a comment
     public function delete($id)
     {
+      // Collect correct entry from table
       $comment = Comment::findOrFail($id);
+      // Delete it
       $comment->delete();
-
+      // Display a message
       Session::flash('success', 'Comment has been deleted successfully');
-
+      // Redirect back to comments
       return redirect()->route('comment.show');
     }
 
     // Customer comments
     public function showCustomerComment()
     {
+      // Get all entries
       $wine = Wine::all();
-      $id = Auth::guard('customer')->user()->id;  // Needs an id from the logged-in user
+      // Get the id of the logged in user
+      $id = Auth::guard('customer')->user()->id;
+      // Get all comments created by the logged in user
       $comments = Comment::where('customer_id', $id)->get();
 
+      // Send to page
       return view('customers.comments.index')->with('comments', $comments)->with('wine', $wine);
     }
 
     // Delete a commment (customer area)
     public function customerCommentDelete($id)
     {
+      // Collect correct comment from database table & delete it
       $comment = Comment::findOrFail($id);
       $comment->delete();
 
+      // Display a message
       Session::flash('success', 'Comment has been deleted successfully');
-
+      // redirect back to all comments
       return redirect()->route('customerComment.show');
     }
     // Edit a comment (customer area)
     public function customerCommentEdit(Comment $comment)
     {
+      // Get all entries from Wine table
       $wine = Wine::all();
-
+      // Show comment edit form
       return view('customers.comments.edit')->with('comment', $comment)->with('wine', $wine);
     }
 

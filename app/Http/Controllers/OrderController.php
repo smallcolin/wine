@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Gloudemans\Shoppingcart\Cart;
 use App\Order;
 use Illuminate\Http\Request;
 use Session;
@@ -39,7 +39,8 @@ class OrderController extends Controller
     // Save an order
     public function store($id)
     {
-      $items = Cart::add($id);
+      // $items = (new Cart)->add($id);
+      $items = Cart::add();
       dd($items);
     }
 

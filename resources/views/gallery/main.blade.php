@@ -16,7 +16,7 @@
         {{csrf_field()}}
         <fieldset class="form-group">
           <label for="images">Add some images to the gallery</label>
-          <input multiple type="file" class="form-control-file" name="images">
+          <input multiple type="file" class="form-control-file" name="images[]">
         </fieldset>
         <button type="submit" class="btn btn-primary">Upload</button>
       </form>

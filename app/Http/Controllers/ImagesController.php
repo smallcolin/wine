@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class ImagesController extends Controller
@@ -26,12 +27,16 @@ class ImagesController extends Controller
   // Upload & store images
   public function store(Request $request)
   {
+    $user_id = Auth::guard('customer')->user()->id;
+    $user_email = Auth::guard('customer')->user()->email;
     foreach ($request->images as $file) {
       Image::create([
-          'customer_id' => $request->user()->id,
-          'filename' => asset($file->store('uploads/' . $request->user()->email)),
+          'customer_id' => $user_id,
+          'image_url' => asset($file->store('uploads/' . $user_email)),
+          'filename' => asset($file->store('uploads/' . $user_email)),
           'name' => $file->getClientOriginalName(),
           'format' => $file->extension(),
+          'description' => 'default'
       ]);
     }
 

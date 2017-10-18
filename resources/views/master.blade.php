@@ -74,21 +74,33 @@
         <div class="flex-center position-ref">
             @if (Route::has('login'))
                 <div class="top-right links">
-                  {{-- @php
-                  dd(Auth::guard('customer')->user());
-                  @endphp --}}
-                    @if(Auth::user() || Auth::guard('customer')->user())
-                      Customer: {{ Auth::guard('customer')->user()->name }}
-                        {{-- <a href="{{ url('/home') }}">Logout</a> --}}
-                        <a href="{{ route('customers.logout') }}"
-                            onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
+                  @php
+                  // dd(Auth::user());
+                  @endphp
+                    @if(Auth::user() || Auth::guard('customer')->user()) <!-- customer guard problem -->
+                      @if (Auth::user())
+                        Admin: {{ Auth::user()->name }}
+                          <a href="{{ route('logout') }}"
+                              onclick="event.preventDefault();
+                                       document.getElementById('logout-form').submit();">
+                              Logout
+                          </a>
 
-                        <form id="logout-form" action="{{ route('customers.logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                              {{ csrf_field() }}
+                          </form>
+                      @else
+                        Customer: {{ Auth::guard('customer')->user()->name }} <!-- customer guard problem -->
+                          <a href="{{ route('customers.logout') }}"
+                              onclick="event.preventDefault();
+                                       document.getElementById('logout-form').submit();">
+                              Logout
+                          </a>
+
+                          <form id="logout-form" action="{{ route('customers.logout') }}" method="POST" style="display: none;">
+                              {{ csrf_field() }}
+                          </form>
+                      @endif
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>

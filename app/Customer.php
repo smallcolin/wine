@@ -40,4 +40,9 @@ class Customer extends Authenticatable
   {
     return $this->hasMany(Wine::class);
   }
+
+  public function images()
+  {
+    return $this->hasMany(Image::class);
+  }
 }

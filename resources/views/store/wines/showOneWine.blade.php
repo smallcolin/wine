@@ -75,6 +75,7 @@
           </ul>
           <hr />
       @endforeach
+      {{$comments->links()}}
     </div>
     <div class="col-sm-6">
       @auth ('customer')

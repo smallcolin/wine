@@ -40,7 +40,7 @@ class WineController extends Controller
       $wine = Wine::findOrFail($id);
 
       // Get all comments associated with a particular wine
-      $comments = $wine->comments()->with('customer')->get();
+      $comments = $wine->comments()->with('customer')->latest()->paginate(5);
 
       // Get the average rating for each wine
       $rating = $wine->comments()->with('customer')->avg('rating');

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use Gloudemans\Shoppingcart\Cart;
 use App\Order;
+use App\Wine;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class OrderController extends Controller
@@ -15,6 +17,22 @@ class OrderController extends Controller
 
       return view('admin.orders.index')->with('orders', $orders);
     }
+
+    // // Show all customer orders'
+    // public function showMyOrders()
+    // {
+    //   $user_id = Auth::guard('customer')->user()->id;
+    //
+    //   // Correct to here!!!!!!!
+    //
+    //   // Collect info from tables
+    //   $orders = Order::findOrFail($user_id);
+    //   // $comments = $wine->comments()->with('customer')->latest()->paginate(5);
+    //
+    //
+    //   // Show results
+    //   return view('customers.orders.index');
+    // }
 
     // Show all orders
     public function checkoutIndex()
@@ -37,11 +55,16 @@ class OrderController extends Controller
     }
 
     // Save an order
-    public function store($id)
+    public function store(Request $request, $id)
     {
-      // $items = (new Cart)->add($id);
-      $items = Cart::add();
+      $product = Wine::find($id);
+
+      // dd($product->id);
+      // $items = Cart::add($product->id);
+
       dd($items);
+      $user_id = Auth::guard('customer')->user()->id;
+      // $items = (new Cart)->add($id);
     }
 
     // Delete an order

@@ -189,7 +189,6 @@ Route::post('/customers/logout', [
 
 // CUSTOMER ROUTES
 // Route::group(['middleware' => 'auth:customer'], function() {
-  // Login pages
 
   // Main customer page
   Route::get('/customer', function () {
@@ -230,6 +229,13 @@ Route::post('/customers/logout', [
     'uses' => 'CommentController@customerCommentUpdate',
     'as' => 'customerComment.update'
   ]);
+
+
+
+
+  // CART ROUTES
+  Route::resource('/cart', 'CartController');
+
 
 
   // Order Routes

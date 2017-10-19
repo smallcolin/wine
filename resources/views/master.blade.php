@@ -149,10 +149,11 @@
                           Customer
                         </li>
                       </a>
-                      <a href="/checkout">
+                      <a href="{{route('cart.index')}}">
                         <li class="list-group-item">
                           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                          Checkout
+                          Cart
+                          <span class="alert badge"></span> <!-- Would be nice to show Cart::count() here -->
                         </li>
                       </a>
                     @endauth

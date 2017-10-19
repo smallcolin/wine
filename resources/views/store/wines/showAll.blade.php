@@ -26,14 +26,14 @@
               <img style="width: 100%; height: auto;" src="{{URL($wine->image_url)}}" alt="">
             </li>
             <li class="list-group-item">{{$wine->name}}</li>
-            <li class="list-group-item">{{$wine->price}} kr</li>
+            <li class="list-group-item">$ {{$wine->price}}</li>
             <li class="list-group-item">
-              <a href="{{route('wine.showOne', ['id' => $wine->id])}}" class="btn btn-outline-danger">
+              <a href="{{route('wine.showOne', [$wine->id])}}" class="btn btn-outline-danger">
                 Read More
               </a>
             </li>
             <li class="list-group-item">
-              <a href="{{route('order.store', ['id' => $wine->id])}}" class="btn btn-outline-success">
+              <a href="{{route('cart.edit', $wine->id)}}" class="btn btn-outline-success">
                 Add to Cart
               </a>
             </li>

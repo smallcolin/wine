@@ -62,6 +62,12 @@ class CartController extends Controller
      */
     public function edit($id)
     {
+
+    }
+
+    // Add Item to Cart
+    public function addItem($id)
+    {
       // Locate wine by id
       $wine = Wine::find($id);
       // Add wine to cart

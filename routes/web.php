@@ -235,6 +235,13 @@ Route::post('/customers/logout', [
 
   // CART ROUTES
   Route::resource('/cart', 'CartController');
+  Route::get('/cart/addItem/{id}', [
+    'uses' => 'CartController@addItem',
+    'as' => 'cart.addItem'
+  ]);
+  // CHECKOUT ROUTES
+  Route::resource('/checkout', 'CheckoutController');
+
 
 
 
@@ -270,10 +277,10 @@ Route::post('/customers/logout', [
 
   // CHECKOUT Routes
   // Basic page
-  Route::get('/checkout', [
-    'uses' => 'OrderController@checkoutIndex',
-    'as' => 'checkout.show',
-  ]);
+  // Route::get('/checkout', [
+  //   'uses' => 'OrderController@checkoutIndex',
+  //   'as' => 'checkout.show',
+  // ]);
 // });
 
 

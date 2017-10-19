@@ -44,6 +44,6 @@
     </div>
   </div>
   <hr />
-  <a style="float:right;"class="btn btn-success" href="">Checkout</a>
+  <a style="float:right;"class="btn btn-success" href="{{route('checkout.index')}}">Checkout</a>
 
 @endsection

@@ -33,7 +33,7 @@
               </a>
             </li>
             <li class="list-group-item">
-              <a href="{{route('cart.edit', $wine->id)}}" class="btn btn-outline-success">
+              <a href="{{route('cart.addItem', $wine->id)}}" class="btn btn-outline-success">
                 Add to Cart
               </a>
             </li>

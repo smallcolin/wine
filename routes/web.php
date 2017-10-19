@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // ADMIN ROUTES
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function() {
   // Main admin page
   Route::get('/admin', function () {
     return view('admin/main');
@@ -88,11 +88,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/comments', [
       'uses' => 'CommentController@index',
       'as' => 'comment.show'
-    ]);
-    // Save a comment
-    Route::post('/comment/store', [
-      'uses' => 'CommentController@store',
-      'as' => 'comment.store'
     ]);
     // Delete Comments
     Route::get('/comment/{id}/delete', [
@@ -193,12 +188,12 @@ Route::post('/customers/logout', [
 ]);
 
 // CUSTOMER ROUTES
-Route::group(['middleware' => 'auth:customer'], function() {
+// Route::group(['middleware' => 'auth:customer'], function() {
   // Login pages
 
   // Main customer page
   Route::get('/customer', function () {
-      return view('customers/main');
+      return view('customers.main');
   });
   // Create a wine
   Route::get('/wines/create', [
@@ -214,6 +209,11 @@ Route::group(['middleware' => 'auth:customer'], function() {
   Route::get('/customer/comments', [
     'uses' => 'CommentController@showCustomerComment',
     'as' => 'customerComment.show'
+  ]);
+  // Save a comment
+  Route::post('/comment/store', [
+    'uses' => 'CommentController@store',
+    'as' => 'comment.store'
   ]);
   // Delete Comments
   Route::get('/customer/comments/{id}/delete', [
@@ -243,6 +243,11 @@ Route::group(['middleware' => 'auth:customer'], function() {
     'uses' => 'OrderController@purchase',
     'as' => 'order.purchase',
   ]);
+  // My Orders
+  Route::get('/orders/myOrders', [
+    'uses' => 'OrderController@showMyOrders',
+    'as' => 'customerOrder.show'
+  ]);
 
   // Images upload
   // Main page link
@@ -263,7 +268,7 @@ Route::group(['middleware' => 'auth:customer'], function() {
     'uses' => 'OrderController@checkoutIndex',
     'as' => 'checkout.show',
   ]);
-});
+// });
 
 
 

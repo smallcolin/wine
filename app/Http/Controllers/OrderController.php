@@ -47,6 +47,10 @@ class OrderController extends Controller
       return view('store.checkout.index')->with('order', $order)->with('total', $total);
     }
 
+    /*------------------------------------------------------------------------*/
+    /*---------------       Add to Cart Section          ---------------------*/
+    /*------------------------------------------------------------------------*/
+
     // Create an order
     public function create()
     {
@@ -61,10 +65,13 @@ class OrderController extends Controller
       // dd($product->id);
       // $items = Cart::add($product->id);
 
-      dd($items);
       $user_id = Auth::guard('customer')->user()->id;
       // $items = (new Cart)->add($id);
     }
+
+    /*------------------------------------------------------------------------*/
+    /*---------------       End of Add to Cart Section       -----------------*/
+    /*------------------------------------------------------------------------*/
 
     // Delete an order
     public function delete($id)
@@ -85,18 +92,17 @@ class OrderController extends Controller
     // Process an Order
     public function purchase()
     {
-
       // Validate & Get all stuff ready for sending to database
-      $this->validate(request(), [
-        'customer_id' => 'required',
-        'order_id' => 'required',
-      ]);
-
-      // Send data to database table
-      $order = Order::create([
-        'customer_id' => request()->customer_id,
-        'order_id' => request()->order_id,
-      ]);
+      // $this->validate(request(), [
+      //   'customer_id' => 'required',
+      //   'order_id' => 'required',
+      // ]);
+      // 
+      // // Send data to database table
+      // $order = Order::create([
+      //   'customer_id' => request()->customer_id,
+      //   'order_id' => request()->order_id,
+      // ]);
 
       // Payment type
       $payment = request()->payment;

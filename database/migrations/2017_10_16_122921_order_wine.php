@@ -16,6 +16,8 @@ class OrderWine extends Migration
       Schema::create('order_wine', function (Blueprint $table) {
           $table->integer('order_id');
           $table->integer('wine_id');
+          $table->integer('qty');
+          $table->float('total');
       });
     }
 

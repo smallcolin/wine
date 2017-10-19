@@ -235,13 +235,18 @@ Route::post('/customers/logout', [
 
   // CART ROUTES
   Route::resource('/cart', 'CartController');
+  // adding item to cart
   Route::get('/cart/addItem/{id}', [
     'uses' => 'CartController@addItem',
     'as' => 'cart.addItem'
   ]);
   // CHECKOUT ROUTES
   Route::resource('/checkout', 'CheckoutController');
-
+  // Create an order
+  Route::post('/checkout/createorder}', [
+    'uses' => 'CheckoutController@createOrder',
+    'as' => 'checkout.createOrder',
+  ]);
 
 
 

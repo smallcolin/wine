@@ -13,7 +13,8 @@ Every customer should have the ability to
   2. browse and upload new images to the gallery
   3. Create a new wine 
   4. Leave comments on each item's page (and edit them)
-  5. Be able to add items (wine) to the shopping cart, then purchase
+  5. Browse through previous orders
+  6. Be able to add items (wine) to the shopping cart, then purchase
   
 Admin has the abiltity to:-
   1.  Create and edit a new country category

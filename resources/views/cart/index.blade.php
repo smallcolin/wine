@@ -13,6 +13,7 @@
           <th>Price</th>
           <th>Amount</th>
           <th>Total</th>
+          <th></th>
         </thead>
         <tbody>
           @foreach ($cartItems as $cartItem)
@@ -20,12 +21,21 @@
               <td>{{$cartItem->name}}</td>
               <td>$ {{round($cartItem->price)}}</td>
               <td>
-                <form action="{{route('cart.update', ['id' => $cartItem->Rowid])}}" method="put">
+                <form action="{{route('cart.update', $cartItem->rowId)}}" method="post">
+                  {{ csrf_field() }}
+                  {{ method_field('PUT') }}
                   <input style="width:3em;" type="number" name="qty" value="{{$cartItem->qty}}">
-                  <button class="btn btn-sm btn-default">update</button>
+                  <input class="btn btn-sm btn-default" type="submit" value="Update">
                 </form>
               </td>
               <td>{{round($cartItem->price)*($cartItem->qty)}}</td>
+              <td>
+                <form action="{{route('cart.destroy', $cartItem->rowId)}}" method="post">
+                  {{ csrf_field() }}
+                  {{ method_field('DELETE') }}
+                  <input class="btn btn-sm btn-danger" type="submit" value="Delete">
+                </form>
+              </td>
             </tr>
           @endforeach
         </tbody>
@@ -39,7 +49,7 @@
               Grand Total:<br />
               $ {{Cart::total()}}
             </td>
-          </tr>
+´          </tr>
         </tfoot>
       </table>
     </div>

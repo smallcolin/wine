@@ -85,23 +85,24 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-      dd('HALLO');
       // Find chosen field to update
-      Cart::update($id, $request->qty);
+      Cart::update($id, request()->qty);
       // Return user to cart
       return redirect()->back();
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the wine from the cart.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+      Cart::remove($id);
+
+      return redirect()->back();
     }
 }

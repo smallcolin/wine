@@ -18,7 +18,7 @@
             <ul style="list-style:none;padding:0;">
               @foreach ($order->wines as $wine)
                 <li>
-                  <a href="{{route('wine.showOne', ['id' => $order->wine_id])}}">
+                  <a href="{{route('wine.showOne', ['id' => $wine->id])}}">
                     {{$wine->name}}
                   </a>
                 </li>

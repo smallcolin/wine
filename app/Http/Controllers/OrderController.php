@@ -33,46 +33,6 @@ class OrderController extends Controller
       return view('customers.orders.index')->with('orders', $orders);
     }
 
-    // Show all orders
-    public function checkoutIndex()
-    {
-      $id = 2;
-      // Find wines based on order id
-      $order = Order::findOrFail($id);
-
-      // Get total cost
-      $total = $order->wines()->sum('price');
-
-      // Show page
-      return view('store.checkout.index')->with('order', $order)->with('total', $total);
-    }
-
-    /*------------------------------------------------------------------------*/
-    /*---------------       Add to Cart Section          ---------------------*/
-    /*------------------------------------------------------------------------*/
-
-    // Create an order
-    public function create()
-    {
-
-    }
-
-    // Save an order
-    public function store(Request $request, $id)
-    {
-      $product = Wine::find($id);
-
-      // dd($product->id);
-      // $items = Cart::add($product->id);
-
-      $user_id = Auth::guard('customer')->user()->id;
-      // $items = (new Cart)->add($id);
-    }
-
-    /*------------------------------------------------------------------------*/
-    /*---------------       End of Add to Cart Section       -----------------*/
-    /*------------------------------------------------------------------------*/
-
     // Delete an order
     public function delete($id)
     {
@@ -82,6 +42,9 @@ class OrderController extends Controller
       // Delete database entry
       $order->delete();
 
+      // Delete pivot table entries
+      $order->wines()->detach();
+
       // Display a message
       Session::flash('success', 'You have deleted the order!');
 
@@ -90,29 +53,29 @@ class OrderController extends Controller
     }
 
     // Process an Order
-    public function purchase()
-    {
-      // Validate & Get all stuff ready for sending to database
-      // $this->validate(request(), [
-      //   'customer_id' => 'required',
-      //   'order_id' => 'required',
-      // ]);
-      // 
-      // // Send data to database table
-      // $order = Order::create([
-      //   'customer_id' => request()->customer_id,
-      //   'order_id' => request()->order_id,
-      // ]);
-
-      // Payment type
-      $payment = request()->payment;
-
-      // Get total cost
-      $total = request()->total;
-
-      // Onscreen message
-      Session::flash('success', 'Order has been processed');
-      // Show purchase complete page
-      return view('store.checkout.complete')->with('order', $order)->with('payment', $payment)->with('total', $total);
-    }
+    // public function purchase()
+    // {
+    //   // Validate & Get all stuff ready for sending to database
+    //   // $this->validate(request(), [
+    //   //   'customer_id' => 'required',
+    //   //   'order_id' => 'required',
+    //   // ]);
+    //   //
+    //   // // Send data to database table
+    //   // $order = Order::create([
+    //   //   'customer_id' => request()->customer_id,
+    //   //   'order_id' => request()->order_id,
+    //   // ]);
+    //
+    //   // Payment type
+    //   $payment = request()->payment;
+    //
+    //   // Get total cost
+    //   $total = request()->total;
+    //
+    //   // Onscreen message
+    //   Session::flash('success', 'Order has been processed');
+    //   // Show purchase complete page
+    //   return view('store.checkout.complete')->with('order', $order)->with('payment', $payment)->with('total', $total);
+    // }
 }

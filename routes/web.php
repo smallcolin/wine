@@ -249,7 +249,6 @@ Route::post('/customers/logout', [
   ]);
 
 
-
   // Order Routes
   // Create an order
   Route::get('/order/{id}/store', [
@@ -279,13 +278,6 @@ Route::post('/customers/logout', [
     'as' => 'gallery.store'
   ]);
 
-
-  // CHECKOUT Routes
-  // Basic page
-  // Route::get('/checkout', [
-  //   'uses' => 'OrderController@checkoutIndex',
-  //   'as' => 'checkout.show',
-  // ]);
 // });
 
 

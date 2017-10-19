@@ -232,7 +232,6 @@ Route::post('/customers/logout', [
 
 
 
-
   // CART ROUTES
   Route::resource('/cart', 'CartController');
   // adding item to cart

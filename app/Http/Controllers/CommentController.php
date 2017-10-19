@@ -15,7 +15,7 @@ class CommentController extends Controller
     public function index()
     {
       // Collect all entries from database table
-      $comments = Comment::all();
+      $comments = Comment::paginate(5);
       // Direct browser to a page
       return view('admin.comments.index')->with('comments', $comments);
     }
@@ -105,7 +105,7 @@ class CommentController extends Controller
       // Get the id of the logged in user
       $id = Auth::guard('customer')->user()->id;
       // Get all comments created by the logged in user
-      $comments = Comment::where('customer_id', $id)->get();
+      $comments = Comment::where('customer_id', $id)->latest()->paginate(5);
 
       // Send to page
       return view('customers.comments.index')->with('comments', $comments)->with('wine', $wine);

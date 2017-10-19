@@ -12,7 +12,7 @@ class CountryController extends Controller
   public function index()
   {
     // Get all countries from table
-    $countries = Country::all();
+    $countries = Country::paginate(10);
     // Direct to show all countries page
     return view('admin.countries.index')->with('countries', $countries);
   }

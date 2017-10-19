@@ -16,7 +16,7 @@ class WineController extends Controller
     public function index()
     {
       // Get all data from table
-      $wines = Wine::all();
+      $wines = Wine::paginate(5);
       // Show the list
       return view('admin.wines.index')->with('wines', $wines);
     }

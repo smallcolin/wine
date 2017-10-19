@@ -28,6 +28,7 @@
           <td>{{$order->wines()->sum('price')}}</td>
         </tr>
       @endforeach
+      {{$orders->links()}}
     </tbody>
   </table>
 @endsection

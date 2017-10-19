@@ -13,7 +13,7 @@ class CustomerController extends Controller
     public function index()
     {
       // Get all customers from table
-      $customers = Customer::all();
+      $customers = Customer::paginate(10);
       // Direct to show all customer page
       return view('admin.customers.index')->with('customers', $customers);
     }

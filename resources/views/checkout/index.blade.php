@@ -11,7 +11,6 @@
       <form action="{{route('checkout.createOrder')}}" method="post">
         {{csrf_field()}}
         <input type="hidden" name="customer_id" value="{{Auth::guard('customer')->user()->id}}">
-        <input type="hidden" name="order_id" value="1">
         <input type="hidden" name="total" value="{{Cart::total()}}">
         <fieldset class="form-group">
           <label for="payment">Payment Method</label>

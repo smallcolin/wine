@@ -33,10 +33,11 @@
           <tr>
             <td></td>
             <td></td>
-            <td>Items: {{Cart::count()}}</td>
+            <td>Items: $ {{Cart::count()}}</td>
             <td>
+              Tax: $ {{Cart::tax()}}<br />
               Grand Total:<br />
-              $ {{round(Cart::total())}}
+              $ {{Cart::total()}}
             </td>
           </tr>
         </tfoot>

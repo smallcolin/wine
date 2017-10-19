@@ -9,7 +9,7 @@
     <div class="col-md-3">
       <ul style="position:fixed;">
         <li class="list-group-item">
-          <a href="">My Orders</a>
+          <a href="{{route('customerOrder.show')}}">My Orders</a>
         </li>
         <li class="list-group-item">
           <a href="{{route('customerComment.show')}}">My Comments</a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Gloudemans\Shoppingcart\Cart;
 use App\Order;
+use App\Customer;
 use App\Wine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,7 @@ use Session;
 
 class OrderController extends Controller
 {
-    // Show all orders
+    // Show all orders (admin)
     public function index()
     {
       $orders = Order::all();
@@ -18,26 +19,24 @@ class OrderController extends Controller
       return view('admin.orders.index')->with('orders', $orders);
     }
 
-    // // Show all customer orders'
-    // public function showMyOrders()
-    // {
-    //   $user_id = Auth::guard('customer')->user()->id;
-    //
-    //   // Correct to here!!!!!!!
-    //
-    //   // Collect info from tables
-    //   $orders = Order::findOrFail($user_id);
-    //   // $comments = $wine->comments()->with('customer')->latest()->paginate(5);
-    //
-    //
-    //   // Show results
-    //   return view('customers.orders.index');
-    // }
+    // Show all orders (customer)
+    public function showMyOrders()
+    {
+      // Collect customer from tables
+      $id = Auth::guard('customer')->user()->id;
+      $customer = Customer::findOrFail($id);
+
+      // Find orders made by that customer
+      $orders = $customer->orders()->with('customer')->latest()->paginate(5);
+
+      // Show results
+      return view('customers.orders.index')->with('orders', $orders);
+    }
 
     // Show all orders
     public function checkoutIndex()
     {
-      $id = 1;
+      $id = 2;
       // Find wines based on order id
       $order = Order::findOrFail($id);
 

@@ -55,6 +55,10 @@
     </div>
   </div>
   <hr />
-  <a style="float:right;"class="btn btn-success" href="{{route('checkout.index')}}">Checkout</a>
+  @if (Cart::count() > 0)
+    <a style="float:right;"class="btn btn-success" href="{{route('checkout.index')}}">Go to Checkout</a>
+  @else
+    <a style="float:right;"class="btn btn-info" href="{{route('store.wines.showAll')}}">Add to items to the cart</a>
+  @endif
 
 @endsection

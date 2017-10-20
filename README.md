@@ -3,8 +3,7 @@
 Final project for the PHP, databases & Versioncontrol course.<br />
 Made with the php framework Laravel (in just under 7 days).
 
-## 
-The project.
+## The project.
 The concept behind this was to build a basic but feature filled e-commerce application.
 It has two main areas, Customer & Admin.<br />
 
@@ -28,8 +27,7 @@ Admin has the abiltity to:-
 *All creating/editing features are only available when a user or admin is logged in.
 
 
-####
-Instructions
+## Instructions
 1. git clone
 2. composer install
 3. Edit .env file (eg. append database name, user & password)

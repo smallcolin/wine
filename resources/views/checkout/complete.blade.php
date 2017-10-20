@@ -12,6 +12,7 @@
         Thank you for your custom.  Have a nice day!
       </p>
       <a class="btn btn-danger" href="/">Back to Shop</a>
+      {{Cart::destroy()}}
     </div>
   </div>
 

@@ -96,8 +96,8 @@
                           @endauth
 
                           @if(!Auth::user() && !Auth::guard('customer')->user())
-                          <li><a href="{{ route('login') }}">Login</a></li>
-                          <li><a href="{{ route('customers.login') }}">Customer Login</a></li>
+                            <li><a href="{{ route('customers.login') }}">Customer Login</a></li>
+                          <li><a href="{{ route('login') }}">Admin Login</a></li>
                           <li><a href="{{ route('register') }}">Register</a></li>
                           @endif
                       </ul>

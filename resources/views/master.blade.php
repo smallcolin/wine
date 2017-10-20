@@ -102,7 +102,7 @@
                           </form>
                       @endif
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('customers.login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
                     @endif
                 </div>

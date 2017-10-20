@@ -153,7 +153,7 @@
                         <li class="list-group-item">
                           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                           Cart
-                          <span class="alert badge"></span> <!-- Would be nice to show Cart::count() here -->
+                          <span style="padding: 10px;" class="badge badge-pill badge-info">{{Cart::count()}}</span> <!-- Would be nice to show Cart::count() here -->
                         </li>
                       </a>
                     @endauth

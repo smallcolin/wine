@@ -39,6 +39,10 @@ class Order extends Model
         'qty'=> $cartItem->qty,
         'total'=> $cartItem->qty * $cartItem->price,
       ]);
+      // Update stock levels when purchase
+      $wine = Wine::find($cartItem->id);
+      $wine->stock -= $cartItem->qty;
+      $wine->save();
     }
   }
 

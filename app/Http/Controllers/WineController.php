@@ -55,8 +55,6 @@ class WineController extends Controller
       $countries = Country::all();
       // Redirect browser
       return view('store.wines.showAllFilter')->with('countries', $countries)->with('country', $country);
-
-
     }
 
 
@@ -78,7 +76,7 @@ class WineController extends Controller
         'customer_id' => 'required',
         'price' => 'required',
         'stock' => 'required',
-        'image_url' => 'required',
+        'image_url' => 'required|mimes:jpeg,jpg,png',
       ]);
 
       // Prepare image for upload
@@ -122,12 +120,14 @@ class WineController extends Controller
         'price' => 'required',
         'stock' => 'required',
         'approved' => 'required',
-        'image_url' => 'required'
       ]);
+      
       // Create image details
-      $image = request()->image_url;
-      $new_name = time().$image->getClientOriginalName();
-      $image->move('uploads/', $new_name);
+      if (request()->image_url) {
+        $image = request()->image_url;
+        $new_name = time().$image->getClientOriginalName();
+        $image->move('uploads/', $new_name);
+      }
 
       // Find id from database
       $wine = Wine::findOrFail($id);
@@ -138,7 +138,9 @@ class WineController extends Controller
       $wine->price = request()->price;
       $wine->stock = request()->stock;
       $wine->approved = request()->approved;
-      $wine->image_url = 'uploads/' . $new_name;
+      if (request()->image_url) {
+        $wine->image_url = 'uploads/' . $new_name;
+      }
       // Save to database
       $wine->save();
 

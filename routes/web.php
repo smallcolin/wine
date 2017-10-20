@@ -188,8 +188,6 @@ Route::post('/customers/logout', [
 ]);
 
 // CUSTOMER ROUTES
-// Route::group(['middleware' => 'auth:customer'], function() {
-
   // Main customer page
   Route::get('/customer', function () {
       return view('customers.main');
@@ -277,12 +275,7 @@ Route::post('/customers/logout', [
     'as' => 'gallery.store'
   ]);
 
-// });
-
-
-
-  // Public Routes
-  //
+  // More wine routes
   // Show one wine
   Route::get('/wines/{id}', [
     'uses' => 'WineController@showOne',

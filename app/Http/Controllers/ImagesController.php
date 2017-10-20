@@ -17,6 +17,7 @@ class ImagesController extends Controller
     return view('gallery.main')->with('images', $images);
   }
 
+  // Show all images (admin)
   public function adminShowImages()
   {
     $images = Image::paginate(10);

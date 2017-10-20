@@ -121,7 +121,7 @@ class WineController extends Controller
         'stock' => 'required',
         'approved' => 'required',
       ]);
-      
+
       // Create image details
       if (request()->image_url) {
         $image = request()->image_url;

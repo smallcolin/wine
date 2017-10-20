@@ -70,8 +70,14 @@ class CartController extends Controller
     {
       // Locate wine by id
       $wine = Wine::find($id);
+
       // Add wine to cart
-      Cart::add($id, $wine->name, 1, $wine->price);
+      if ($wine->stock > 0) {
+        Cart::add($id, $wine->name, 1, $wine->price);
+      } else {
+        Session::flash('error', 'This wine is unavailable at this time');
+        return redirect()->back();
+      }
       // Print message
       Session::flash('success', 'Wine added to cart');
       // Return viw to store

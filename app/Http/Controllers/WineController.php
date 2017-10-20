@@ -12,7 +12,6 @@ use Session;
 
 class WineController extends Controller
 {
-    // Show all wines (admin)
     public function index()
     {
       // Get all data from table
@@ -155,11 +154,8 @@ class WineController extends Controller
       // Find a wine via its id
       $wine = Wine::findOrFail($id);
 
-      // Check if wine features on an order
-      $wineOnOrder = Order::where('wine_id', $id)->get();
-
-      // Disable delete if any orders are found with that wine_id
-      if (count($wineOnOrder) > 0) {
+      // Check if wine exists on an order
+      if ($wine->orders()->count()) {
         // Display a message
         Session::flash('error', 'You can\'t delete a wine that is attached to an order!');
         // Redirect to same page

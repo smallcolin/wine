@@ -6,16 +6,19 @@
       Edit Country
     </div>
     <div class="panel-body">
-      <form class="" action="{{route('country.update', ['country' => $country->id])}}" method="post">
+      <form class="" action="{{route('countries.update', ['id' => $country->id])}}" method="post">
         {{csrf_field()}}
+        {{ method_field('PUT') }}
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" name="name" value="{{$country->name}}" class="form-control">
         </div>
+
         <div class="form-group">
-          <button class="btn btn-success">Update</button>
+          <input class="btn btn-sm btn-info" type="submit" value="Update">
         </div>
       </form>
+
     </div>
   </div>
 @endsection

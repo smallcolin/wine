@@ -17,6 +17,11 @@ class CountryController extends Controller
     return view('admin.countries.index')->with('countries', $countries);
   }
 
+  public function show()
+  {
+
+  }
+
   public function create()
   {
     // Show form to create a country
@@ -39,7 +44,7 @@ class CountryController extends Controller
     Session::flash('success', 'Country was successfully created!');
 
     // redirect to show all countries
-    return redirect('/countries');
+    return redirect('/admin/countries');
   }
 
   public function edit(Country $country)
@@ -64,10 +69,10 @@ class CountryController extends Controller
     Session::flash('success', 'Country was updated');
 
     // Redirect admin back to show all countries
-    return redirect()->route('country.show');
+    return redirect('/admin/countries');
   }
 
-  public function delete($id)
+  public function destroy($id)
   {
     // Search database for id
     $country = Country::findOrFail($id);
@@ -88,7 +93,8 @@ class CountryController extends Controller
     Session::flash('success', 'You have deleted the country!');
 
     // redirect to all countries page
-    return redirect()->route('country.show');
+    // return redirect()->route('admin.countries.index');
+    return redirect('/admin/countries');
   }
 
 }

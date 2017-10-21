@@ -9,10 +9,10 @@
     <div class="col-md-3">
       <ul style="position:fixed;">
         <li class="list-group-item">
-          <a href="{{route('country.show')}}">Countries</a>
+          <a href="{{route('countries.index')}}">Countries</a>
         </li>
         <li class="list-group-item">
-          <a href="{{route('country.create')}}">Create a Country</a>
+          <a href="{{route('countries.create')}}">Create a Country</a>
         </li>
         <li class="list-group-item">
           <a href="{{route('wine.show')}}">Wines</a>

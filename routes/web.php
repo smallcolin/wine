@@ -31,36 +31,10 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/admin', function () {
     return view('admin/main');
   });
+  
   // Countries
-  Route::get('/countries', [
-    'uses' => 'CountryController@index',
-    'as' => 'country.show'
-  ]);
-  // Create a country
-  Route::get('/countries/create', [
-    'uses' => 'CountryController@create',
-    'as' => 'country.create'
-  ]);
-  // Save a country
-  Route::post('/country/store', [
-    'uses' => 'CountryController@store',
-    'as' => 'country.store'
-  ]);
-  // Edit a country
-  Route::get('/country/{country}/edit', [
-    'uses' => 'CountryController@edit',
-    'as' => 'country.edit'
-  ]);
-  // Update a country
-  Route::post('/country/{id}/update', [
-    'uses' => 'CountryController@update',
-    'as' => 'country.update'
-  ]);
-  // Delete a country
-  Route::get('/country/{id}/delete', [
-    'uses' => 'CountryController@delete',
-    'as' => 'country.delete'
-  ]);
+  Route::resource('/admin/countries', 'CountryController');
+
   // Customer Routes
   // Show all customers
   Route::get('/admin/customers', [

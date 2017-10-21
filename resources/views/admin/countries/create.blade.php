@@ -6,7 +6,7 @@
       Create a new country?
     </div><br />
     <div class="panel-body">
-      <form class="" action="{{route('country.store')}}" method="post">
+      <form class="" action="{{route('countries.store')}}" method="post">
         {{csrf_field()}}
         <div class="form-group">
           <input type="text" name="name" value="" class="form-control">

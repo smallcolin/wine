@@ -17,11 +17,6 @@ class CountryController extends Controller
     return view('admin.countries.index')->with('countries', $countries);
   }
 
-  public function show()
-  {
-
-  }
-
   public function create()
   {
     // Show form to create a country

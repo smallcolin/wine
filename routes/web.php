@@ -31,9 +31,13 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/admin', function () {
     return view('admin/main');
   });
-  
+
   // Countries
-  Route::resource('/admin/countries', 'CountryController');
+  Route::resource('/admin/countries', 'CountryController', [
+    'except' => ['show']
+  ]);
+  // Customer Routes
+  // Route::resource('/admin/customers', 'CustomerController');
 
   // Customer Routes
   // Show all customers

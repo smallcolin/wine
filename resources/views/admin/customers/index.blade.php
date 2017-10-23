@@ -17,7 +17,7 @@
         <td>{{$customer->name}}</td>
         <td>{{$customer->email}}</td>
         <td>
-          <a class="btn-sm btn-info" href="{{route('customers.edit', ['id' => $customer->id])}}">
+          <a class="btn btn-sm btn-info" href="{{route('customers.edit', ['id' => $customer->id])}}">
             Edit
           </a>
         </td>

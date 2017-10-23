@@ -26,46 +26,43 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // ADMIN ROUTES
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
   // Main admin page
-  Route::get('/admin', function () {
+  Route::get('', function () {
     return view('admin/main');
   });
-
   // Countries
-  Route::resource('/admin/countries', 'CountryController', [
+  Route::resource('/countries', 'CountryController', [
     'except' => ['show']
   ]);
   // Customer Routes
-  Route::resource('/admin/customers', 'CustomerController', [
+  Route::resource('/customers', 'CustomerController', [
     'except' => ['show']
   ]);
   // Comments
-  Route::resource('/admin/comments', 'CommentController', [
+  Route::resource('/comments', 'CommentController', [
     'except' => ['show', 'store']
   ]);
   // Orders
-  Route::resource('/admin/orders', 'OrderController', [
+  Route::resource('/orders', 'OrderController', [
     'except' => ['show', 'store']
   ]);
   // Wines
-  Route::resource('/admin/wines', 'WineController', [
+  Route::resource('/wines', 'WineController', [
     'except' => ['show', 'store']
   ]);
   // Images
-  Route::resource('/admin/images', 'ImagesController', [
+  Route::resource('/images', 'ImagesController', [
     'except' => ['show', 'store']
   ]);
-
-    // Export CSV files
-    Route::get('/export', function () {
-        return view('admin/export/exportCsv');
-    });
-    // Make CSV file and export it
-    Route::post('/export/data', [
-      'uses' => 'ExportController@download',
-      'as' => 'export.createCsvFile'
-    ]);
+  // Export CSV files
+  Route::get('/export', function () {
+      return view('admin/export/exportCsv');
+  });
+  Route::post('/export/data', [
+    'uses' => 'ExportController@download',
+    'as' => 'export.createCsvFile'
+  ]);
 });
 
 // CUSTOMER ROUTES

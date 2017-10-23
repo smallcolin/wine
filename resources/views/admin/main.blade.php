@@ -27,7 +27,7 @@
           <a href="{{route('orders.index')}}">Orders</a>
         </li>
         <li class="list-group-item">
-          <a href="/export">Export</a>
+          <a href="/admin/export">Export</a>
         </li>
         <li class="list-group-item">
           <a href="{{route('images.index')}}">Gallery</a>

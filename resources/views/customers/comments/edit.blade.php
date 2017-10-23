@@ -6,9 +6,8 @@
       <h3>Edit Comment</h3>
     </div>
     <div class="panel-body">
-      <form action="{{route('comments.update', ['comment' => $comment->id])}}" method="post">
+      <form action="{{route('customerComment.update', ['comment' => $comment->id])}}" method="post">
         {{ csrf_field() }}
-        {{ method_field('PUT') }}
         <input type="hidden" name="wine_id" value="{{$comment->wine_id}}">
         <div class="form-group">
           <label for="customer_id">Name</label><br />

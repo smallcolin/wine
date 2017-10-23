@@ -139,7 +139,28 @@ Route::group(['prefix' => 'customers'], function() {
     'as' => 'checkout.createOrder',
   ]);
   // Customer Comments
-  Route::resource('/comments', 'CustomerCommentController', [
-    'except' => ['show']
+  Route::get('/customer/comments', [
+    'uses' => 'CommentController@showCustomerComment',
+    'as' => 'customerComment.show'
+  ]);
+  // Save a comment
+  Route::post('/comment/store', [
+    'uses' => 'CommentController@store',
+    'as' => 'comment.store'
+  ]);
+  // Delete Comments
+  Route::get('/customer/comments/{id}/delete', [
+    'uses' => 'CommentController@customerCommentDelete',
+'as' => 'customerComment.delete'
+  ]);
+  // Edit a comment
+  Route::get('/customer/comment/{comment}/edit', [
+    'uses' => 'CommentController@customerCommentEdit',
+ 'as' => 'customerComment.edit'
+  ]);
+  // Update a comment
+  Route::post('/customer/comment/{id}/update', [
+    'uses' => 'CommentController@customerCommentUpdate',
+    'as' => 'customerComment.update'
   ]);
 });

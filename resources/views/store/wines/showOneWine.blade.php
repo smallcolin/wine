@@ -80,7 +80,7 @@
     <div class="col-sm-6">
       @auth ('customer')
         <h3>Leave a comment…</h3>
-        <form action="{{route('comments.store')}}" method="post">
+        <form action="{{route('comment.store')}}" method="post">
           {{ csrf_field() }}
           <input type="hidden" name="wine_id" value="{{$wine->id}}">
           <input type="hidden" name="customer_id" value="{{Auth::guard('customer')->user()->id}}">

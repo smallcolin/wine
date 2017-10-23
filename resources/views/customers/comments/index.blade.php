@@ -25,16 +25,14 @@
           </td>
           <td>{{$comment->rating}}</td>
           <td>
-            <a class="btn btn-sm btn-info" href="{{route('comments.edit', ['comment' => $comment->id])}}">
+            <a class="btn btn-sm btn-info" href="{{route('customerComment.edit', ['comment' => $comment->id])}}">
               Edit
             </a>
           </td>
           <td>
-            <form action="{{route('comments.destroy', ['id' => $comment->id])}}" method="post">
-              {{ csrf_field() }}
-              {{ method_field('DELETE') }}
-              <input class="btn btn-sm btn-danger" type="submit" value="Delete">
-            </form>
+            <a class="btn btn-sm btn-danger" href="{{route('customerComment.delete', ['id' => $comment->id])}}">
+              Delete
+            </a>
           </td>
         </tr>
       @endforeach

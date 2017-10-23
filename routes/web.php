@@ -48,40 +48,21 @@ Route::group(['middleware' => 'auth'], function() {
   Route::resource('/admin/orders', 'OrderController', [
     'except' => ['show', 'store']
   ]);
+  // Wines
+  Route::resource('/admin/wines', 'WineController', [
+    'except' => ['show', 'store']
+  ]);
 
-    // Export CSV files
-    // Basic admin page
-    Route::get('/export', function () {
-        return view('admin/export/exportCsv');
-    });
-    // Make CSV file and export it
-    Route::post('/export/data', [
-      'uses' => 'ExportController@download',
-      'as' => 'export.createCsvFile'
-    ]);
-
-
-  // Wine Routes
-    // Show all Wines
-    Route::get('/wines', [
-      'uses' => 'WineController@index',
-      'as' => 'wine.show',
-    ]);
-    // Edit a wine
-    Route::get('/wine/{wine}/edit', [
-      'uses' => 'WineController@edit',
-      'as' => 'wine.edit'
-    ]);
-    // Update a wine
-    Route::post('/wine/{id}/update', [
-      'uses' => 'WineController@update',
-      'as' => 'wine.update'
-    ]);
-    // Delete a wine
-    Route::get('/wine/{id}/delete', [
-      'uses' => 'WineController@delete',
-      'as' => 'wine.delete'
-    ]);
+  // Export CSV files
+  // Basic admin page
+  Route::get('/export', function () {
+      return view('admin/export/exportCsv');
+  });
+  // Make CSV file and export it
+  Route::post('/export/data', [
+    'uses' => 'ExportController@download',
+    'as' => 'export.createCsvFile'
+  ]);
 
     // Gallery routes
     // Show all images (admin)
@@ -106,25 +87,30 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 });
 
-// CUSTOMER LOGIN ROUTES
-Route::get('/customers/login', [
-  'uses' => 'Auth\CustomerLoginController@showLoginForm',
-  'as' => 'customers.login',
-]);
-Route::post('/customers/login', [
-  'uses' => 'Auth\CustomerLoginController@login',
-  'as' => 'customers.attempt',
-]);
-Route::post('/customers/logout', [
-  'uses' => 'Auth\CustomerLoginController@logout',
-  'as' => 'customers.logout',
-]);
+// CUSTOMER ROUTES
+Route::group(['prefix' => 'customers'], function() {
+
+  // Login Routes
+  Route::get('/login', [
+    'uses' => 'Auth\CustomerLoginController@showLoginForm',
+    'as' => 'customers.login',
+  ]);
+  Route::post('/login', [
+    'uses' => 'Auth\CustomerLoginController@login',
+    'as' => 'customers.attempt',
+  ]);
+  Route::post('/logout', [
+    'uses' => 'Auth\CustomerLoginController@logout',
+    'as' => 'customers.logout',
+  ]);
+});
 
 // CUSTOMER ROUTES
   // Main customer page
   Route::get('/customer', function () {
       return view('customers.main');
   });
+
   // Create a wine
   Route::get('/wines/create', [
     'uses' => 'WineController@create',
@@ -135,6 +121,17 @@ Route::post('/customers/logout', [
     'uses' => 'WineController@store',
     'as' => 'wine.store'
   ]);
+  // Show one wine
+  Route::get('/wines/{id}', [
+    'uses' => 'WineController@showOne',
+    'as' => 'wine.showOne'
+  ]);
+  // Filter wines by country
+  Route::get('/wines/{country}/filter', [
+    'uses' => 'WineController@filterWine',
+    'as' => 'wine.filter',
+  ]);
+
   // Show all comments
   Route::get('/customer/comments', [
     'uses' => 'CommentController@showCustomerComment',
@@ -198,17 +195,6 @@ Route::post('/customers/logout', [
     'as' => 'gallery.store'
   ]);
 
-  // More wine routes
-  // Show one wine
-  Route::get('/wines/{id}', [
-    'uses' => 'WineController@showOne',
-    'as' => 'wine.showOne'
-  ]);
-  // Filter wines by country
-  Route::get('/wines/{country}/filter', [
-    'uses' => 'WineController@filterWine',
-    'as' => 'wine.filter',
-  ]);
   // Show all Images (Gallery)
   Route::get('/gallery', [
     'uses' => 'ImagesController@index',

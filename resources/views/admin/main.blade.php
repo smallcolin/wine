@@ -15,7 +15,7 @@
           <a href="{{route('countries.create')}}">Create a Country</a>
         </li>
         <li class="list-group-item">
-          <a href="{{route('wine.show')}}">Wines</a>
+          <a href="{{route('wines.index')}}">Wines</a>
         </li>
         <li class="list-group-item">
           <a href="{{route('customers.index')}}">Customers</a>

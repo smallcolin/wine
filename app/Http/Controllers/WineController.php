@@ -148,10 +148,10 @@ class WineController extends Controller
       Session::flash('success', 'Wine details were updated!');
 
       // redirect user to all wines page
-      return redirect()->route('wine.show');
+      return redirect('/admin/wines');
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
       // Find a wine via its id
       $wine = Wine::findOrFail($id);
@@ -171,7 +171,7 @@ class WineController extends Controller
       Session::flash('success', 'Wine deleted successfully');
 
       // Redirect user to wines page
-      return redirect()->route('wine.show');
+      return redirect('/admin/wines');
     }
 
 }

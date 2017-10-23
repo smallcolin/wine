@@ -7,9 +7,9 @@
       <h2>Edit wine</h2>
     </div>
     <div class="panel-body">
-      <form class="" action="{{route('wine.update', ['wine' => $wine->id])}}" method="post" enctype="multipart/form-data">
+      <form class="" action="{{route('wines.update', ['wine' => $wine->id])}}" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
-
+        {{ method_field('PUT') }}
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">

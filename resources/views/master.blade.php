@@ -143,7 +143,7 @@
                       </a>
                     @endauth
                     @auth ('customer')
-                      <a href="/customer">
+                      <a href="/customers">
                         <li class="list-group-item">
                           <i class="fa fa-user" aria-hidden="true"></i>
                           Customer

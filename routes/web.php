@@ -14,16 +14,36 @@
 Route::get('/', function () {
     return view('master');
 });
+
+// PUBLIC ROUTES
 // Show shop
 Route::get('/', [
   'uses' => 'WineController@showAll',
   'as' => 'store.wines.showAll'
 ]);
+// Show one wine
+Route::get('/wines/{id}', [
+  'uses' => 'WineController@showOne',
+  'as' => 'wine.showOne'
+]);
+// Filter wines by country
+Route::get('/wines/{country}/filter', [
+  'uses' => 'WineController@filterWine',
+  'as' => 'wine.filter',
+]);
+// Gallery Main page link
+Route::get('/gallery', function () {
+    return view('gallery.main');
+});
+// Show all Images (Gallery)
+Route::get('/gallery', [
+  'uses' => 'ImagesController@customerShowImages',
+  'as' => 'gallery.show',
+]);
 
-// Auth routes
+// AUTH ROUTES
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-
 
 // ADMIN ROUTES
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
@@ -49,7 +69,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
   ]);
   // Wines
   Route::resource('/wines', 'WineController', [
-    'except' => ['show', 'store']
+    'except' => ['show', 'store', 'create']
   ]);
   // Images
   Route::resource('/images', 'ImagesController', [
@@ -80,24 +100,20 @@ Route::group(['prefix' => 'customers'], function() {
     'uses' => 'Auth\CustomerLoginController@logout',
     'as' => 'customers.logout',
   ]);
-  // My Orders
-  Route::get('/myOrders', [
-    'uses' => 'OrderController@showMyOrders',
-    'as' => 'customerOrder.show'
-  ]);
+  // Main customer page
+  Route::get('', function() {
+      return view('customers.main');
+  });
   // Upload and save images
   Route::post('/gallery/store', [
     'uses' => 'ImagesController@store',
     'as' => 'gallery.store'
   ]);
-});
-
-// CUSTOMER ROUTES
-  // Main customer page
-  Route::get('/customer', function () {
-      return view('customers.main');
-  });
-
+  // My Orders
+  Route::get('/myOrders', [
+    'uses' => 'OrderController@showMyOrders',
+    'as' => 'customerOrder.show'
+  ]);
   // Create a wine
   Route::get('/wines/create', [
     'uses' => 'WineController@create',
@@ -108,16 +124,22 @@ Route::group(['prefix' => 'customers'], function() {
     'uses' => 'WineController@store',
     'as' => 'wine.store'
   ]);
-  // Show one wine
-  Route::get('/wines/{id}', [
-    'uses' => 'WineController@showOne',
-    'as' => 'wine.showOne'
+  // CART ROUTES
+  Route::resource('/cart', 'CartController');
+  // adding item to cart
+  Route::get('/cart/addItem/{id}', [
+    'uses' => 'CartController@addItem',
+    'as' => 'cart.addItem'
   ]);
-  // Filter wines by country
-  Route::get('/wines/{country}/filter', [
-    'uses' => 'WineController@filterWine',
-    'as' => 'wine.filter',
+  // CHECKOUT ROUTES
+  Route::resource('/checkout', 'CheckoutController');
+  // Create an order
+  Route::post('/checkout/createorder}', [
+    'uses' => 'CheckoutController@createOrder',
+    'as' => 'checkout.createOrder',
   ]);
+});
+
 
   // Show all comments
   Route::get('/customer/comments', [
@@ -143,32 +165,4 @@ Route::group(['prefix' => 'customers'], function() {
   Route::post('/customer/comment/{id}/update', [
     'uses' => 'CommentController@customerCommentUpdate',
     'as' => 'customerComment.update'
-  ]);
-
-
-
-  // CART ROUTES
-  Route::resource('/cart', 'CartController');
-  // adding item to cart
-  Route::get('/cart/addItem/{id}', [
-    'uses' => 'CartController@addItem',
-    'as' => 'cart.addItem'
-  ]);
-  // CHECKOUT ROUTES
-  Route::resource('/checkout', 'CheckoutController');
-  // Create an order
-  Route::post('/checkout/createorder}', [
-    'uses' => 'CheckoutController@createOrder',
-    'as' => 'checkout.createOrder',
-  ]);
-
-  // GALLERY ROUTES
-  // Main page link
-  Route::get('/gallery', function () {
-      return view('gallery.main');
-  });
-  // Show all Images (Gallery)
-  Route::get('/gallery', [
-    'uses' => 'ImagesController@customerShowImages',
-    'as' => 'gallery.show',
   ]);

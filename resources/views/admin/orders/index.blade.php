@@ -31,9 +31,11 @@
 
         </td>
         <td>
-          <a class="btn-sm btn-danger" href="{{route('order.delete', ['id' => $order->id])}}">
-            Delete
-          </a>
+          <form action="{{route('orders.destroy', ['id' => $order->id])}}" method="post">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <input class="btn btn-sm btn-danger" type="submit" value="Delete">
+          </form>
         </td>
       </tr>
     @endforeach

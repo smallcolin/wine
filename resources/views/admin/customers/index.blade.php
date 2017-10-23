@@ -22,7 +22,6 @@
           </a>
         </td>
         <td>
-
           <form action="{{route('customers.destroy', ['id' => $customer->id])}}" method="post">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}

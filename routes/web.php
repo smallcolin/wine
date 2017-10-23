@@ -44,6 +44,10 @@ Route::group(['middleware' => 'auth'], function() {
   Route::resource('/admin/comments', 'CommentController', [
     'except' => ['show', 'store']
   ]);
+  // Orders
+  Route::resource('/admin/orders', 'OrderController', [
+    'except' => ['show', 'store']
+  ]);
 
     // Export CSV files
     // Basic admin page
@@ -56,17 +60,6 @@ Route::group(['middleware' => 'auth'], function() {
       'as' => 'export.createCsvFile'
     ]);
 
-  // Admin Order routes
-  // Show all orders
-  Route::get('/orders', [
-    'uses' => 'OrderController@index',
-    'as' => 'order.show'
-  ]);
-  // Delete an order
-  Route::get('/order/{id}/delete', [
-    'uses' => 'OrderController@delete',
-    'as' => 'order.delete'
-  ]);
 
   // Wine Routes
     // Show all Wines
@@ -186,19 +179,9 @@ Route::post('/customers/logout', [
   ]);
 
 
-  // Order Routes
-  // Create an order
-  Route::get('/order/{id}/store', [
-    'uses' => 'OrderController@store',
-    'as' => 'order.store'
-  ]);
-  // Purchase Route
-  Route::post('/orders/purchase', [
-    'uses' => 'OrderController@purchase',
-    'as' => 'order.purchase',
-  ]);
+  // CUSTOMER ORDER ROUTE
   // My Orders
-  Route::get('/orders/myOrders', [
+  Route::get('/customer/myOrders', [
     'uses' => 'OrderController@showMyOrders',
     'as' => 'customerOrder.show'
   ]);

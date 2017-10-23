@@ -40,6 +40,11 @@ Route::get('/gallery', [
   'uses' => 'ImagesController@customerShowImages',
   'as' => 'gallery.show',
 ]);
+// Add item to cart
+Route::get('/cart/addItem/{id}', [
+  'uses' => 'CartController@addItem',
+  'as' => 'cart.addItem'
+]);
 
 // AUTH ROUTES
 Auth::routes();
@@ -126,11 +131,6 @@ Route::group(['prefix' => 'customers'], function() {
   ]);
   // CART ROUTES
   Route::resource('/cart', 'CartController');
-  // adding item to cart
-  Route::get('/cart/addItem/{id}', [
-    'uses' => 'CartController@addItem',
-    'as' => 'cart.addItem'
-  ]);
   // CHECKOUT ROUTES
   Route::resource('/checkout', 'CheckoutController');
   // Create an order
@@ -138,7 +138,6 @@ Route::group(['prefix' => 'customers'], function() {
     'uses' => 'CheckoutController@createOrder',
     'as' => 'checkout.createOrder',
   ]);
-
   // Customer Comments
   Route::resource('/comments', 'CustomerCommentController', [
     'except' => ['show']

@@ -12,17 +12,17 @@ class ImagesController extends Controller
   // Show all images
   public function index()
   {
-    $images = Image::all();
-
-    return view('gallery.main')->with('images', $images);
-  }
-
-  // Show all images (admin)
-  public function adminShowImages()
-  {
     $images = Image::paginate(10);
 
     return view('admin.gallery.index')->with('images', $images);
+  }
+
+  // Show all images (admin)
+  public function customerShowImages()
+  {
+    $images = Image::all();
+
+    return view('gallery.main')->with('images', $images);
   }
 
   // Upload & store images
@@ -72,10 +72,10 @@ class ImagesController extends Controller
     Session::flash('success', 'Gallery image info was updated');
 
     // Redirect admin back to show all countries
-    return redirect()->route('adminImages.show');
+    return redirect('/admin/images');
   }
 
-  public function delete($id)
+  public function destroy($id)
   {
     // Search database for id
     $image = Image::findOrFail($id);
@@ -87,6 +87,6 @@ class ImagesController extends Controller
     Session::flash('success', 'You have deleted the image!');
 
     // redirect to all countries page
-    return redirect()->route('adminImages.show');
+    return redirect('/admin/images');
   }
 }

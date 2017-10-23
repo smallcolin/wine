@@ -30,7 +30,7 @@
           <a href="/export">Export</a>
         </li>
         <li class="list-group-item">
-          <a href="{{route('adminImages.show')}}">Gallery</a>
+          <a href="{{route('images.index')}}">Gallery</a>
         </li>
       </ul>
     </div>

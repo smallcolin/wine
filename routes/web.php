@@ -52,44 +52,24 @@ Route::group(['middleware' => 'auth'], function() {
   Route::resource('/admin/wines', 'WineController', [
     'except' => ['show', 'store']
   ]);
-
-  // Export CSV files
-  // Basic admin page
-  Route::get('/export', function () {
-      return view('admin/export/exportCsv');
-  });
-  // Make CSV file and export it
-  Route::post('/export/data', [
-    'uses' => 'ExportController@download',
-    'as' => 'export.createCsvFile'
+  // Images
+  Route::resource('/admin/images', 'ImagesController', [
+    'except' => ['show', 'store']
   ]);
 
-    // Gallery routes
-    // Show all images (admin)
-    Route::get('/admin/images', [
-      'uses' => 'ImagesController@adminShowImages',
-      'as' => 'adminImages.show',
-    ]);
-    // Delete an image
-    Route::get('/admin/comments/{id}/delete', [
-      'uses' => 'ImagesController@delete',
-      'as' => 'galleryImage.delete'
-    ]);
-    // Edit an image
-    Route::get('/admin/image/{image}/edit', [
-      'uses' => 'ImagesController@edit',
-      'as' => 'galleryImage.edit'
-    ]);
-    // Update a image
-    Route::post('/admin/image/{id}/update', [
-      'uses' => 'ImagesController@update',
-      'as' => 'galleryImage.update'
+    // Export CSV files
+    Route::get('/export', function () {
+        return view('admin/export/exportCsv');
+    });
+    // Make CSV file and export it
+    Route::post('/export/data', [
+      'uses' => 'ExportController@download',
+      'as' => 'export.createCsvFile'
     ]);
 });
 
 // CUSTOMER ROUTES
 Route::group(['prefix' => 'customers'], function() {
-
   // Login Routes
   Route::get('/login', [
     'uses' => 'Auth\CustomerLoginController@showLoginForm',
@@ -102,6 +82,16 @@ Route::group(['prefix' => 'customers'], function() {
   Route::post('/logout', [
     'uses' => 'Auth\CustomerLoginController@logout',
     'as' => 'customers.logout',
+  ]);
+  // My Orders
+  Route::get('/myOrders', [
+    'uses' => 'OrderController@showMyOrders',
+    'as' => 'customerOrder.show'
+  ]);
+  // Upload and save images
+  Route::post('/gallery/store', [
+    'uses' => 'ImagesController@store',
+    'as' => 'gallery.store'
   ]);
 });
 
@@ -175,28 +165,13 @@ Route::group(['prefix' => 'customers'], function() {
     'as' => 'checkout.createOrder',
   ]);
 
-
-  // CUSTOMER ORDER ROUTE
-  // My Orders
-  Route::get('/customer/myOrders', [
-    'uses' => 'OrderController@showMyOrders',
-    'as' => 'customerOrder.show'
-  ]);
-
-  // Images upload
+  // GALLERY ROUTES
   // Main page link
   Route::get('/gallery', function () {
       return view('gallery.main');
   });
-
-  // Upload and save images
-  Route::post('/gallery/store', [
-    'uses' => 'ImagesController@store',
-    'as' => 'gallery.store'
-  ]);
-
   // Show all Images (Gallery)
   Route::get('/gallery', [
-    'uses' => 'ImagesController@index',
+    'uses' => 'ImagesController@customerShowImages',
     'as' => 'gallery.show',
   ]);

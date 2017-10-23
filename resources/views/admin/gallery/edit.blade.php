@@ -7,9 +7,9 @@
       <h2>Edit Gallery Image</h2>
     </div>
     <div class="panel-body">
-      <form class="" action="{{route('galleryImage.update', ['image' => $image->id])}}" method="post">
+      <form class="" action="{{route('images.update', ['image' => $image->id])}}" method="post">
         {{csrf_field()}}
-
+        {{ method_field('PUT') }}
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">

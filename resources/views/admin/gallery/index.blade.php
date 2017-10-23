@@ -21,14 +21,16 @@
           <td>{{$image->name}}</td>
           <td>{{$image->description}}</td>
           <td>
-            <a class="btn-sm btn-info" href="{{route('galleryImage.edit', ['image' => $image->id])}}">
+            <a class="btn btn-sm btn-info" href="{{route('images.edit', ['image' => $image->id])}}">
               Edit
             </a>
           </td>
           <td>
-            <a class="btn-sm btn-danger" href="{{route('galleryImage.delete', ['id' => $image->id])}}">
-              Delete
-            </a>
+            <form action="{{route('images.destroy', ['id' => $image->id])}}" method="post">
+              {{ csrf_field() }}
+              {{ method_field('DELETE') }}
+              <input class="btn btn-sm btn-danger" type="submit" value="Delete">
+            </form>
           </td>
         </tr>
       @endforeach

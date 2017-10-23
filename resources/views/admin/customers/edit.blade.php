@@ -6,8 +6,9 @@
       Edit Customer
     </div>
     <div class="panel-body">
-      <form class="" action="{{route('customer.update', ['customer' => $customer->id])}}" method="post">
+      <form class="" action="{{route('customers.update', ['id' => $customer->id])}}" method="post">
         {{csrf_field()}}
+        {{method_field('PUT')}}
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" name="name" value="{{$customer->name}}" class="form-control">

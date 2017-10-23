@@ -41,11 +41,11 @@ class CustomerController extends Controller
       Session::flash('success', 'Customer name was updated');
 
       // Redirect back to show all customers
-      return redirect()->route('customer.show');
+      return redirect('/admin/customers');
     }
 
     // Delete a customer
-    public function delete($id)
+    public function destroy($id)
     {
       // Search database for id
       $customer = Customer::findOrFail($id);
@@ -65,6 +65,6 @@ class CustomerController extends Controller
       Session::flash('success', 'Customer has been taken care of');
 
       // redirect to all customers page
-      return redirect()->route('customer.show');
+      return redirect('/admin/customers');
     }
 }

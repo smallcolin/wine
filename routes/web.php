@@ -37,29 +37,9 @@ Route::group(['middleware' => 'auth'], function() {
     'except' => ['show']
   ]);
   // Customer Routes
-  // Route::resource('/admin/customers', 'CustomerController');
-
-  // Customer Routes
-  // Show all customers
-  Route::get('/admin/customers', [
-    'uses' => 'CustomerController@index',
-    'as' => 'customer.show'
-    ])->middleware('auth');
-    // Delete a customer
-    Route::get('/customer/{id}/delete', [
-      'uses' => 'CustomerController@delete',
-      'as' => 'customer.delete'
-    ]);
-    // Edit a customer
-    Route::get('/customer/{customer}/edit', [
-      'uses' => 'CustomerController@edit',
-      'as' => 'customer.edit'
-    ]);
-    // Update a customer
-    Route::post('/customer/{id}/update', [
-      'uses' => 'CustomerController@update',
-      'as' => 'customer.update'
-      ]);
+  Route::resource('/admin/customers', 'CustomerController', [
+    'except' => ['show']
+  ]);
 
   // COMMENTS ROUTES
     // Admin Comments page

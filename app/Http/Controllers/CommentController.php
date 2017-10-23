@@ -80,12 +80,11 @@ class CommentController extends Controller
       Session::flash('success', 'Comment was updated!');
 
       // redirect user to all wines page
-      return redirect()->route('comment.show');
-
+      return redirect('/admin/comments');
     }
 
     // Delete a comment
-    public function delete($id)
+    public function destroy($id)
     {
       // Collect correct entry from table
       $comment = Comment::findOrFail($id);
@@ -94,7 +93,7 @@ class CommentController extends Controller
       // Display a message
       Session::flash('success', 'Comment has been deleted successfully');
       // Redirect back to comments
-      return redirect()->route('comment.show');
+      return redirect('/admin/comments/');
     }
 
     // Customer comments

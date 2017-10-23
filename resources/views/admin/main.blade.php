@@ -21,7 +21,7 @@
           <a href="{{route('customers.index')}}">Customers</a>
         </li>
         <li class="list-group-item">
-          <a href="{{route('comment.show')}}">Comments</a>
+          <a href="{{route('comments.index')}}">Comments</a>
         </li>
         <li class="list-group-item">
           <a href="{{route('order.show')}}">Orders</a>

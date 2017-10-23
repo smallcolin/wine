@@ -40,28 +40,10 @@ Route::group(['middleware' => 'auth'], function() {
   Route::resource('/admin/customers', 'CustomerController', [
     'except' => ['show']
   ]);
-
-  // COMMENTS ROUTES
-    // Admin Comments page
-    Route::get('/comments', [
-      'uses' => 'CommentController@index',
-      'as' => 'comment.show'
-    ]);
-    // Delete Comments
-    Route::get('/comment/{id}/delete', [
-      'uses' => 'CommentController@delete',
-      'as' => 'comment.delete'
-    ]);
-    // Edit a comment
-    Route::get('/comment/{comment}/edit', [
-      'uses' => 'CommentController@edit',
-      'as' => 'comment.edit'
-    ]);
-    // Update a comment
-    Route::post('/comment/{id}/update', [
-      'uses' => 'CommentController@update',
-      'as' => 'comment.update'
-    ]);
+  // Comments
+  Route::resource('/admin/comments', 'CommentController', [
+    'except' => ['show', 'store']
+  ]);
 
     // Export CSV files
     // Basic admin page
@@ -74,17 +56,17 @@ Route::group(['middleware' => 'auth'], function() {
       'as' => 'export.createCsvFile'
     ]);
 
-    // Admin Order routes
-    // Show all orders
-    Route::get('/orders', [
-      'uses' => 'OrderController@index',
-      'as' => 'order.show'
-    ]);
-    // Delete an order
-    Route::get('/order/{id}/delete', [
-      'uses' => 'OrderController@delete',
-      'as' => 'order.delete'
-    ]);
+  // Admin Order routes
+  // Show all orders
+  Route::get('/orders', [
+    'uses' => 'OrderController@index',
+    'as' => 'order.show'
+  ]);
+  // Delete an order
+  Route::get('/order/{id}/delete', [
+    'uses' => 'OrderController@delete',
+    'as' => 'order.delete'
+  ]);
 
   // Wine Routes
     // Show all Wines

@@ -41,11 +41,22 @@
 
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="approved">Approved</label><br />
-              Yes
-              <input type="radio" name="approved" value="1">
-              No
-              <input type="radio" name="approved" value="0">
+              <label for="approved" class="approved">Approved</label><br />
+              @php
+                $wineApproved = $wine->approved;
+
+                if ($wineApproved == 0) {
+                  echo 'Yes';
+                  echo ' <input type="radio" name="approved" value="1">';
+                  echo 'No';
+                  echo ' <input type="radio" name="approved" checked="checked" value="0">';
+                } else {
+                  echo 'Yes';
+                  echo ' <input type="radio" name="approved" checked="checked" value="1">';
+                  echo 'No';
+                  echo ' <input type="radio" name="approved" value="0">';
+                }
+              @endphp
             </div>
           </div>
         </div>
